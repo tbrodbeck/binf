@@ -1,95 +1,95 @@
 public class Fraglich {
 
-   static int a;
+    static int a;
 
-   public static void main(String[] args) {
-      int a = 5;
-      int[] c = {16, 4, 2, 9};
+    public static void main(String[] args) {
+        int a = 5;
+        int[] c = {16, 4, 2, 9};
 
-      /*** Stelle 1 **
-      a = 5; b ist nicht vergeben; c = {16, 4, 2, 9}; */
+        /*** Stelle 1 **
+         a = 5; b ist nicht vergeben; c = {16, 4, 2, 9}; */
 
-      initialize();
+        initialize();
 
-      /*** Stelle 3 **
-      a = 23; b nicht vergeben; c = {16, 4, 2, 9} */
+        /*** Stelle 3 **
+         a = 23; b nicht vergeben; c = {16, 4, 2, 9} */
 
-      for (int b = -1; b < 1; b += 3) {
+        for (int b = -1; b < 1; b += 3) {
 
-         /*** Stelle 4 **
-         a = 23; b = -1; c = {16, 4, 2, 9} */
-         a /= 2;
-         c[b + 2] -= c[b + 2];
-      }
+            /*** Stelle 4 **
+             a = 23; b = -1; c = {16, 4, 2, 9} */
+            a /= 2;
+            c[b + 2] -= c[b + 2];
+        }
 
-      /*** Stelle 5 **
-      a = 11; b nicht vergeben; c = {16, 0, 2, 9} */
+        /*** Stelle 5 **
+         a = 11; b nicht vergeben; c = {16, 0, 2, 9} */
 
-      for (a = 2; a < 3; a++) {
+        for (a = 2; a < 3; a++) {
 
-         int b = 2;
-         c[a] -= c[b];
+            int b = 2;
+            c[a] -= c[b];
 
-         /*** Stelle 6 **
-         a = 2; b = 2; c = {16, 0, 0, 9} */
-      }
+            /*** Stelle 6 **
+             a = 2; b = 2; c = {16, 0, 0, 9} */
+        }
 
-      /*** Stelle 7 **
-      a = 3; b nicht vergeben; c = {16, 0, 0, 9} */
+        /*** Stelle 7 **
+         a = 3; b nicht vergeben; c = {16, 0, 0, 9} */
 
-      int b = method(a + c[a - 3]);
+        int b = method(a + c[a - 3]);
 
-      /*** Stelle 9
-      a = 3; b = 3; c = {16, 0, 0, 9} ***/
+        /*** Stelle 9
+         a = 3; b = 3; c = {16, 0, 0, 9} ***/
 
-      b = 7 + method(++a, c);
+        b = 7 + method(++a, c);
 
-      /*** Stelle 11
-      a = 4; b = 12; c = {8, 0, 0, 9} ***/
+        /*** Stelle 11
+         a = 4; b = 12; c = {8, 0, 0, 9} ***/
 
-      a = method(method(method(a), new int[]{b, a, c[0], c[2], c[3], c[1]}));
+        a = method(method(method(a), new int[]{b, a, c[0], c[2], c[3], c[1]}));
 
-      /*** Stelle 15
-      a = 4; b = 12; c = {8, 0, 0, 9} ***/
-   }
+        /*** Stelle 15
+         a = 4; b = 12; c = {8, 0, 0, 9} ***/
+    }
 
-   static void initialize() {
+    static void initialize() {
 
-      int b = 0;
+        int b = 0;
 
-      a = 23;
+        a = 23;
 
-      /*** Stelle 2 **
-      a = 23; b = 0; c = {16, 4, 2, 9} */
-   }
+        /*** Stelle 2 **
+         a = 23; b = 0; c = {16, 4, 2, 9} */
+    }
 
-   protected static int method(int b) {
+    protected static int method(int b) {
 
-      /*** Stelle 8
-      a = 3; b = 19; c = {16, 0, 0, 9}
-      Stelle 12
-      a = 4; b = 4; c = {8, 0, 0, 9}
-      Stelle 14
-      a = 4; b = 5; c = {8, 0, 0, 9}
-       ***/
+        /*** Stelle 8
+         a = 3; b = 19; c = {16, 0, 0, 9}
+         Stelle 12
+         a = 4; b = 4; c = {8, 0, 0, 9}
+         Stelle 14
+         a = 4; b = 5; c = {8, 0, 0, 9}
+         ***/
 
-      return a;
-   }
+        return a;
+    }
 
-   private static int method(int a, int[] c) {
+    private static int method(int a, int[] c) {
 
-      a++;
-      c[0] /= 2;
-      c[0] = c[0] + c[1];
-      c = new int[4];
+        a++;
+        c[0] /= 2;
+        c[0] = c[0] + c[1];
+        c = new int[4];
 
-      /*** Stelle 10
-      a = 5; b = 3; c = {0, 0, 0, 0}
-      Stelle 13
-      a = 5; b = 3; c = {0, 0, 0, 0} ***/
+        /*** Stelle 10
+         a = 5; b = 3; c = {0, 0, 0, 0}
+         Stelle 13
+         a = 5; b = 3; c = {0, 0, 0, 0} ***/
 
-      return a;
-   }
+        return a;
+    }
 
 }
 
