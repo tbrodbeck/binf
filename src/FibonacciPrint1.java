@@ -2,7 +2,6 @@
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 10.04.17.
  */
- */
 public class FibonacciPrint1 {
 
     public static void main(String[] args) {
@@ -38,7 +37,6 @@ public class FibonacciPrint1 {
     private static void output(int n) {
         Fibonacci f = new Fibonacci();
         System.out.println("| n | f(n) |");
-        4
         System.out.println("+---+--------+");
         System.out.println("| 0| 0|");
         System.out.println("| 1| 1|");

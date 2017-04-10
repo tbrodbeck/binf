@@ -20,8 +20,8 @@ public class FibonacciPrint {
         System.out.println("|  0|       0|");
         System.out.println("|  1|       1|");
         Fibonacci fib = new Fibonacci();
-        for(int i = 2; i <= n; n++){
-            System.out.printf("|%3d|%8d| %n", i, fib.next());
+        for(int i = 2; i < n-1 ; i++){
+            System.out.printf("|%3d|%8d|%n", i, fib.next());
         }
     }
 }
