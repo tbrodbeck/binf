@@ -5,18 +5,19 @@
  * Implementieren Sie die Klasse Fibonacci.
  */
 public class Fibonacci {
-    // f(n-1)
-    private int nMinus1;
-    // f(n-2)
-    private int nMinus2;
+
+    //Instanzvariablen n1 -> n^-1, n2 -> n^-2
+    private int n1;
+    private int n2;
 
     /**
      * Konstruktor
      */
     public Fibonacci() {
-        nMinus1 = 1;
-        nMinus2 = 0;
+        n1 = 1;
+        n2 = 0;
     }
+
     /**
      * Ein Objekt der Klasse Fibonacci besitzt die Instanz-methode next(), die,
      * beginnend mit f(2), immer die nächste Zahl der Fibonacci-Folge zurück
@@ -24,10 +25,11 @@ public class Fibonacci {
      * dritten 3, dann 5, 8 usw. zurück gegeben.
      * @return nexte Fibonacci nummer
      */
+
     public int next() {
-        int n = nMinus1 + nMinus2;
-        nMinus2 = nMinus1;
-        nMinus1 = n;
-        return n;
+        int aktuell = n1 + n2;
+        n2 = n1;
+        n1 = aktuell;
+        return aktuell;
     }
 }
