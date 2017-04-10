@@ -3,7 +3,7 @@
  * @version 10.04.17.
  */
  */
-public class FibonacciPrint {
+public class FibonacciPrint1 {
 
     public static void main(String[] args) {
         if (args.length == 1) {
