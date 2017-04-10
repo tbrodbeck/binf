@@ -1,7 +1,12 @@
 import java.util.Objects;
 
 /**
- * Created by Ronja on 07.04.17.
+ * @author Ronja von Kittlitz, Tillmann Brodbeck
+ * @version 10.04.17.
+ *
+ * Testen Sie Ihre neue Klasse mit Hilfe einer separaten Testklasse. Das Testprogramm soll einige In- stanzen der Klasse
+ * Fraction erzeugen und jede der programmierten Operationen mindestens ein- mal testen. Es soll automatisiert eine
+ * Ausgabe erfolgen, ob der jeweilige Test erfolgreich war oder nicht.
  */
 public class FractionTest {
     public static void main(String[] args) {

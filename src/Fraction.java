@@ -4,7 +4,6 @@
  * @version 06/04/2017.
  * Implementieren Sie die Klasse Fraction mit den beiden Instanzvariablen
  * numerator und denominator zur Repräsentation eines Bruches.
-Testen Sie Ihre neue Klasse mit Hilfe einer separaten Testklasse. Das Testprogramm soll einige Instanzen der Klasse Fraction erzeugen und jede der programmierten Operationen mindestens einmal testen. Es soll automatisiert eine Ausgabe erfolgen, ob der jeweilige Test erfolgreich war oder nicht.
  */
 public class Fraction {
 
@@ -67,7 +66,6 @@ public class Fraction {
         Fraction neu = this.multiply(new Fraction(1));
         for(Fraction f : factors) {
             neu = neu.multiply(f);
-            System.out.println(neu.toString());
         }
         return neu;
     }
