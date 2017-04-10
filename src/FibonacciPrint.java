@@ -2,11 +2,6 @@
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 10.04.17.
  */
-/**
- * Command-Line Program to print a table of a Fibonacci series on the console.
- *
- * @author Mathias Menninghaus (mathias.menninghaus@uos.de)
- *
  */
 public class FibonacciPrint {
     /**
