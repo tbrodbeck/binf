@@ -45,12 +45,12 @@ public class Fraglich {
       b = 7 + method(++a, c);
 
       /*** Stelle 11
-      a = 4; b = 12; c = {16, 0, 0, 9} ***/
+      a = 4; b = 12; c = {8, 0, 0, 9} ***/
 
       a = method(method(method(a), new int[]{b, a, c[0], c[2], c[3], c[1]}));
 
       /*** Stelle 15
-      a = 4; b = 12; c = {16, 0, 0, 9} ***/
+      a = 4; b = 12; c = {8, 0, 0, 9} ***/
    }
 
    static void initialize() {
@@ -68,9 +68,9 @@ public class Fraglich {
       /*** Stelle 8
       a = 3; b = 19; c = {16, 0, 0, 9}
       Stelle 12
-      a = 4; b = 4; c = {16, 0, 0, 9}
+      a = 4; b = 4; c = {8, 0, 0, 9}
       Stelle 14
-      a = 4; b = 5; c = {16, 0, 0, 9}
+      a = 4; b = 5; c = {8, 0, 0, 9}
        ***/
 
       return a;
@@ -92,3 +92,11 @@ public class Fraglich {
    }
 
 }
+
+/*
+In diesem Programm und allgemeint in Java wird Call by Value verwendet. Das
+heißt, dass Methoden-Parameter anhand ihrer übergebenen Werte aufgerufen werden.
+In anderen Programmiersprachen gibt es auch Call by Reference und das meint,
+dass die Methode direkt Zugriff auf die ihr übergebenen Variablen hat, weil die
+Variablen und nicht nur die Werte übergeben werden.
+ */
