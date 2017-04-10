@@ -1,36 +1,28 @@
 /**
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 10.04.17.
- */
-/**
  *
- * Class Fibonacci, a Fibonacci Object holds the information of a Fibonacci
- * Series. One can get the next number f(n) in the series with the method next,
- * starting with f(2).
- *
- * @author Mathias Menninghaus (mathias.menninghaus@uos.de)
- *
+ * Implementieren Sie die Klasse Fibonacci.
  */
 public class Fibonacci {
-    /**
-     * Holds f(n-1)
-     */
+    // f(n-1)
     private int nMinus1;
-    /**
-     * Holds f(n-2)
-     */
+    // f(n-2)
     private int nMinus2;
+
     /**
-     * Create new Fibonacci series, next would deliver f(2).
+     * Konstruktor
      */
     public Fibonacci() {
         nMinus1 = 1;
         nMinus2 = 0;
     }
     /**
-     * Get next number in this Fibonacci series. Starts with f(2).
-     *
-     * @return next number in Fibonacci series.
+     * Ein Objekt der Klasse Fibonacci besitzt die Instanz-methode next(), die,
+     * beginnend mit f(2), immer die nächste Zahl der Fibonacci-Folge zurück
+     * gibt. Beim ersten Aufruf von next wird also 1, beim zweiten 2, beim
+     * dritten 3, dann 5, 8 usw. zurück gegeben.
+     * @return nexte Fibonacci nummer
      */
     public int next() {
         int n = nMinus1 + nMinus2;
