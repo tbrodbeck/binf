@@ -1,3 +1,5 @@
+package blatt01;
+
 public class Fraglich {
 
     static int a;
