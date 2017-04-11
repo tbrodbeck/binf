@@ -7,3 +7,5 @@ out/
 /.idea/modules.xml
 /.idea/vcs.xml
 /.idea/kotlinc.xml
+.DS_Store
+src/.DS_Store
