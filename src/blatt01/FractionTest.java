@@ -1,4 +1,4 @@
-import java.util.Objects;
+package blatt01;
 
 /**
  * @author Ronja von Kittlitz, Tillmann Brodbeck
