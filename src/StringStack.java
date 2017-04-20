@@ -10,6 +10,22 @@ public class StringStack {
    public StringStack() {
       this.first = null;
    }
+
+   public StringStack(StringStack s){
+      this();
+      StringStack umkehr = new StringStack();
+      while (!s.empty()) {
+         umkehr.push(s.peek());
+         s.pop();
+      }
+      while (!umkehr.empty()) {
+         String kopie = new String(umkehr.peek());
+         s.push(umkehr.peek());
+         push(kopie);
+         umkehr.pop();
+      }
+      umkehr = null;
+   }
    
    private StringStackEntry first;
 
