@@ -16,12 +16,12 @@ public class TickerTest {
         Company nutella = new Company("Nutella GmBH");
         Company fussball = new Company("Fussball ABC");
         java.changeStockPrice(555.6);
-        java = null;
+        java = null; // java wird gelöscht
         testMethode();
         nutella.changeStockPrice(66.6);
         fussball.changeStockPrice(0.1);
-        fussball.finalize();
-        System.gc();
+        fussball.finalize(); // finalize wird getestet
+        System.gc(); // Garbage Collector wird implizit gerufen
 
 
     }
