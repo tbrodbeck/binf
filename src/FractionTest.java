@@ -1,5 +1,3 @@
-package blatt01;
-
 /**
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 10.04.17.
