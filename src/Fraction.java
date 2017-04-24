@@ -16,6 +16,7 @@ public class Fraction {
      * @param denominator zaehler
      */
     public Fraction(int numerator, int denominator) {
+        if(denominator == 0) throw new RuntimeException("Nenner darf nicht null sein");
         int ggT = ggT(denominator, numerator);
         this.numerator = numerator/ggT;
         this.denominator = denominator/ggT;
@@ -125,6 +126,12 @@ public class Fraction {
      * @return
      */
     public Fraction parseFraction(String text) {
+        if (text.matches("-?//d+/[1-9]//d*")) {
+
+            String[] s = text.split("/");
+            Integer.getInteger(s[0]);
+        }
+                System.out.println("geklappt");
         return null;
     }
 

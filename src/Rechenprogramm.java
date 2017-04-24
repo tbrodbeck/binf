@@ -12,4 +12,10 @@
  */
 public class Rechenprogramm {
 
+    public static void main(String[] args) {
+        String s = "5/4";
+        System.out.println(s);
+        if (s.matches("-? //d +/[1-9]//d*"))
+            System.out.println("yes");
+    }
 }
