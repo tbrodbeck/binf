@@ -99,20 +99,33 @@ public class Fraction {
 
     /**
      * Erweitern Sie die Klasse Fraction von Blatt 1 um die Methoden add(Fraction addend) und
-     * substract(Fraction subtrahend), die die übergebene Fraction addieren bzw. subtrahieren und das Ergebnis als neue Fraction zurückgeben.
-
-     Implementieren Sie zusätzlich die Klassenmethode parseFraction, die eine Fraction wie von der toString-Methode ausgegeben übergeben bekommt und die passende Instanz vom Typ Fraction zurückliefert. Um zu überprüfen, ob der übergebene String einen korrekten Bruch darstellt, sollen Sie die Methode matches(String regex) der Klasse String benutzen und für regex einen passenden regulären Ausdruck einsetzen. Erklären Sie Ihrem Tutor, welche Funktion die einzelnen Komponenten Ihres regulären Ausdrucks haben. In der Dokumentation der Klasse Pattern aus der Java-API ﬁnden sie alles Wissenswerte über die Generierung eines regulären Ausdrucks in Java. Nutzen Sie zur Verarbeitung des String seine Methode split und die Methode Integer.parseInt vom letzten Aufgabenblatt.
-
-     Verwenden Sie die erweiterte Fraction anschließend für ein einfaches Rechenprogramm, das über die Kommandozeile zwei Brüche und einen Operator erhält, die so deﬁnierte Rechnung ausführt und das Ergebnis auf der Standard-Konsole ausgibt. Als Operatoren sind +, -, * und / zulässig. Achten Sie auf Fehlerbehandlung und eine geeignete Ausgabe von Fehlermeldungen auf System.err. Geben Sie bei Fehleingaben auch immer eine Anleitung zur Bedienung des Programms auf der Standard-Konsole aus.
-
-     Hinweis: Das Symbol * hat auf der Konsole eine besondere Bedeutung, deswegen geben Sie dieses beim Testen immer in " an. (Beispiel: java Calculator 1/2 " * " -1/2).
+     * substract(Fraction subtrahend), die die übergebene Fraction addieren bzw. subtrahieren und das
+     * Ergebnis als neue Fraction zurückgeben.
      * @param addend
      */
-    add(Fraction addend) {
-
+    public Fraction add(Fraction addend) {
+        return null;
     }
 
-    substract(Fraction subtrahend) {
-
+    public Fraction substract(Fraction subtrahend) {
+        return null;
     }
+
+    /**
+     *  Implementieren Sie zusätzlich die Klassenmethode parseFraction, die eine Fraction wie von der
+     *  toString-Methode ausgegeben übergeben bekommt und die passende Instanz vom Typ Fraction
+     *  zurückliefert. Um zu überprüfen, ob der übergebene String einen korrekten Bruch darstellt, sollen
+     *  Sie die Methode matches(String regex) der Klasse String benutzen und für regex einen passenden
+     *  regulären Ausdruck einsetzen. Erklären Sie Ihrem Tutor, welche Funktion die einzelnen Komponenten
+     *  Ihres regulären Ausdrucks haben. In der Dokumentation der Klasse Pattern aus der Java-API ﬁnden
+     *  sie alles Wissenswerte über die Generierung eines regulären Ausdrucks in Java. Nutzen Sie zur
+     *  Verarbeitung des String seine Methode split und die Methode Integer.parseInt vom letzten
+     *  Aufgabenblatt.
+     * @param text
+     * @return
+     */
+    public Fraction parseFraction(String text) {
+        return null;
+    }
+
 }
