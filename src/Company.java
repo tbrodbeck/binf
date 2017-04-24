@@ -40,9 +40,12 @@ Nachdem Sie die oben beschriebene Funktionalität umgesetzt haben, bearbeiten Si
 
 1. Erklären Sie Ihrem Tutor anhand der implementierten Klassen die Vor- und Nachteile des Singleton - Entwurfsmusters
 Vorteile:
-mehrere Instanzen können auf ein Objekt zugreifen
--> Ressourcenschonend, effizient, wirtschaftlich
+-> wenn nur eine Instanz existiert, sinnvolle objektorientierte Lösung
+-> bessere Kontrolle über den Zugriff
+-> Ressourcenschonend, effizient
+
+
 Nachteile:
--> Überlastungsgefahr, eventuell längere Wartezeiten
 -> Klassenvariablen verschwemmen das Lokalitätsprinzip
+-> Gefahr Konzept zu missbrauchen als globale Variable
  */
