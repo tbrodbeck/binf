@@ -18,9 +18,9 @@ public class Ticker {
     }
 
     /**
-     * Ein Objekt der Klasse Ticker enthält die Methode print(String text), die den übergebenen String auf der
-     * Standard-Konsole ausgibt. Dabei werden alle Zeilenumbrüche entfernt und jeder übergebene String mit +++
-     * von den vorherigen und nachfolgenden String-Objekten getrennt.
+     * Ein Objekt der Klasse Ticker enthält die Methode print(String text), die den übergebenen String auf
+     * der Standard-Konsole ausgibt. Dabei werden alle Zeilenumbrüche entfernt und jeder übergebene String
+     * mit +++ von den vorherigen und nachfolgenden String-Objekten getrennt.
      * @param text
      */
     public void print(String text) {
