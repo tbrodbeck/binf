@@ -1,3 +1,5 @@
+package blatt02;
+
 /**
  * Created by Ronja on 18.04.17.
  */

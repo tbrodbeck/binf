@@ -1,3 +1,5 @@
+package blatt02;
+
 /**
  * A Stack that holds Strings. Works after the LIFO (Last in first out)
  * principle.

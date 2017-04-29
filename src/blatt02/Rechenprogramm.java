@@ -1,3 +1,5 @@
+package blatt02;
+
 /**
  *  Verwenden Sie die erweiterte Fraction anschließend für ein einfaches Rechenprogramm, das über die
  *  Kommandozeile zwei Brüche und einen Operator erhält, die so deﬁnierte Rechnung ausführt und das
@@ -15,7 +17,15 @@ public class Rechenprogramm {
     public static void main(String[] args) {
         String s = "5/4";
         System.out.println(s);
-        if (s.matches("-? //d +/[1-9]//d*"))
+
+        if (s.matches("(-?)(\\d+)/([1-9])(\\d*)"))
             System.out.println("yes");
+        if (s.matches("-?\\d+/[1-9]\\d*"))
+            System.out.println("yes");
+
+        String[] splitted = s.split("/");
+        System.out.println(splitted[0]);
+        System.out.println(splitted[1]);
+
     }
 }
