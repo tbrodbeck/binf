@@ -6,7 +6,7 @@
  */
 public class Rectangle extends Volume {
 
-    public Rectangle(int dimension) {
-        super( dimension );
+    public Rectangle(Point p1, Point p2){
+        super(p1,p2);
     }
 }
