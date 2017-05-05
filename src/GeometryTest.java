@@ -15,8 +15,6 @@ public class GeometryTest {
         Rectangle p_p2 = new Rectangle( p, p2);
         Volume v = new Volume( new Point( 4,5,6 ), p, p );
 
-        Geometry encaps = p.encapsulate( p2 );
-
         if (p.volume() != 0)
             System.out.println("Fehler1");
         if (p2d.volume() != 0)
@@ -25,8 +23,17 @@ public class GeometryTest {
             System.out.println("Fehler3");
         if (v.volume() != Math.abs( 4 - 5 ) * Math.abs( 5 - 6 ) * Math.abs( 6 - 7 ))
             System.out.println("Fehler4");
-        if (((Rectangle)encaps).getPoints())
-            System.out.println("Fehler5");
+
+        // Teste encapsulate für zwei Punkte -> alle Koordinaten sollen gleich sein
+        Geometry encaps = p.encapsulate( p2 );
+        Point[] e2p = p_p2.getPoints();
+        Point[] e2pt = ((Rectangle)encaps).getPoints();
+        if (e2p.length != e2pt.length)
+            System.out.println("Fehler 5");
+        for (int i = 0; i < e2pt.length; i++) {
+            if (!e2p[i].getCoords().equals( e2pt[i].getCoords() ))
+                System.out.println("Fehler5_" + i);
+        }
 
 //        System.out.println(p);
 //        System.out.println(p2d);
