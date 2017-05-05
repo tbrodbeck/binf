@@ -24,12 +24,14 @@ public class GeometryTest {
         if (v.volume() != Math.abs( 4 - 5 ) * Math.abs( 5 - 6 ) * Math.abs( 6 - 7 ))
             System.out.println("Fehler4");
 
-        // Teste encapsulate für zwei Punkte -> alle Koordinaten sollen gleich sein
+        // Teste encapsulate für zwei Punkte
         Geometry encaps = p.encapsulate( p2 );
         Point[] e2p = p_p2.getPoints();
         Point[] e2pt = ((Rectangle)encaps).getPoints();
+        // gleiche Anzahl von Punkten
         if (e2p.length != e2pt.length)
             System.out.println("Fehler 5");
+        // gleiche Kordinaten der einzelnen Punkte
         for (int i = 0; i < e2pt.length; i++) {
             if (!e2p[i].getCoords().equals( e2pt[i].getCoords() ))
                 System.out.println("Fehler5_" + i);
