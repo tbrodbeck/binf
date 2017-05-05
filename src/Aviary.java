@@ -17,16 +17,23 @@ public class Aviary {
       //allAbilities gibt allAbilities der Oberklasse (also die Ability der Oberklasse/Fly) + und die Ability der Klasse
       //Parrot/Talk zurück
       System.out.println("4: parrot.allAbilities            : " + parrot.allAbilities());
-      //
+      //gibt statisch gebundene Variable Ability des Parrots zurück
       System.out.println("5: parrot.ability                 : " + parrot.ability);
 
       Bird carsten = new Dodo();
+      //Variable Ability wird statisch gebunden + Compiler weiß nur das Carsten ein Bird ist
       System.out.println("6: carsten.ability                : " + carsten.ability);
+      //Methode allAbilites() wird dynamisch gebunden da hilft auch der Typecast nichts, bei Dodo gibt allAbilities() nur
+       // Instanzvariable ability zurück
       System.out.println("7: ((Bird)carsten).allAbilities() : " + ((Bird) carsten).allAbilities());
 
       Bird einstein = parrot;
+      // auch hier wird allAbilities wieder dynamisch gebunden und benutzt die allAbilities Methode von Parrot
       System.out.println("8: einstein.allAbilities()        : " + einstein.allAbilities());
+      //in der Klasse Parrot wird getAbilitiy() nicht überladen -> Methode von der Oberklasse Bird wird benutzt
       System.out.println("9: einstein.getAbility()          : " + einstein.getAbility());
+      //Instanzvariable wird eigentlich statisch an den Typ der Variable gebunden aber durch Typecast wird sie statisch
+      // an Parrot gebunden
       System.out.println("10: ((Parrot)einstein).ability    : " + ((Parrot) einstein).ability);
    }
 }
