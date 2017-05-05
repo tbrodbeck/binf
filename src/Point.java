@@ -37,7 +37,7 @@ public class Point extends Geometry implements Comparable{
     public Geometry encapsulate(Geometry other) {
         if (dimensions() != other.dimensions()) return null;
         if (other instanceof Point)
-
+            return null;
         return null;
     }
 
