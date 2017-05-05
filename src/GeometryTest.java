@@ -9,10 +9,13 @@ public class GeometryTest {
     public static void main(String[] args) {
 
         Point p = new Point( 5, 6, 7 );
+        Point p2 = new Point( 0, 0, 0 );
         Point2D p2d = new Point2D( 1,1 );
         Rectangle r = new Rectangle( p2d, new Point( -2, 8));
+        Rectangle p_p2 = new Rectangle( p, p2);
         Volume v = new Volume( new Point( 4,5,6 ), p, p );
 
+        Geometry encaps = p.encapsulate( p2 );
 
         if (p.volume() != 0)
             System.out.println("Fehler1");
@@ -22,7 +25,8 @@ public class GeometryTest {
             System.out.println("Fehler3");
         if (v.volume() != Math.abs( 4 - 5 ) * Math.abs( 5 - 6 ) * Math.abs( 6 - 7 ))
             System.out.println("Fehler4");
-
+        if (((Rectangle)encaps).getPoints())
+            System.out.println("Fehler5");
 
 //        System.out.println(p);
 //        System.out.println(p2d);
