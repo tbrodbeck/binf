@@ -13,6 +13,7 @@ public class GeometryTest {
         Rectangle r = new Rectangle( p2d, new Point( -2, 8));
         Volume v = new Volume( new Point( 4,5,6 ), p, p );
 
+
         if (p.volume() != 0)
             System.out.println("Fehler1");
         if (p2d.volume() != 0)

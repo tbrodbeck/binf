@@ -51,6 +51,7 @@ public class Volume extends Geometry implements Comparable {
     public Geometry encapsulate(Geometry other) {
         if (dimensions() != other.dimensions())
             return null;
+
         return null;
     }
 

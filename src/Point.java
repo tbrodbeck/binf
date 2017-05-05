@@ -36,8 +36,10 @@ public class Point extends Geometry implements Comparable{
      */
     public Geometry encapsulate(Geometry other) {
         if (dimensions() != other.dimensions()) return null;
-        if (other instanceof Point)
-            return null;
+        if (other instanceof Point) {
+            return new Rectangle(this, (Point)other);
+        }
+        
         return null;
     }
 
