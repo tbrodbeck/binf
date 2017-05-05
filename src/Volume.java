@@ -29,7 +29,7 @@ public class Volume extends Geometry implements Comparable {
         double vol = 1;
         for (int dim = 0; dim < this.dimensions(); dim++){
             // find the minimum and maximum values of the respecting dimension of each point
-            double min = points[0].getCoords()[0];
+            double min = points[0].getCoords()[dim];
             double max = min;
             for (Point p: points) {
                 // new min?

@@ -12,6 +12,8 @@ public class GeometryTest {
         Point2D p2d = new Point2D( 1,1 );
         Rectangle r = new Rectangle( p2d, new Point( -2, 8));
         Volume v = new Volume( new Point( 4,5,6 ), p, p );
+        Volume v2 = new Volume( new Point( 1,2,3 ), new Point( 3,1,2 ), new Point( 0,0,0 ));
+        Volume v3 = new Volume( p, p, p );
 
         if (p.volume() != 0)
             System.out.println("Fehler1");
@@ -22,11 +24,14 @@ public class GeometryTest {
         if (v.volume() != Math.abs( 4 - 5 ) * Math.abs( 5 - 6 ) * Math.abs( 6 - 7 ))
             System.out.println("Fehler4");
 
+
 //        System.out.println(p);
 //        System.out.println(p2d);
 //        System.out.println(v);
 //        System.out.println(r);
-System.out.println(r.volume());
+        System.out.println(v.volume());
+        System.out.println(v2.volume());
+        System.out.println(v3.volume());
         System.out.println( Math.abs( 4 - 5 ) * Math.abs( 5 - 6 ) * Math.abs( 6 - 7 ));
 //        System.out.println(v.volume());
     }
