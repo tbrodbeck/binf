@@ -36,10 +36,18 @@ public class Point extends Geometry implements Comparable{
      */
     public Geometry encapsulate(Geometry other) {
         if (dimensions() != other.dimensions()) return null;
-        if (other instanceof Point) {
+        if (other instanceof Point){
+            if ((Point)other.getCoords() == getCoords())
+                return this;
             return new Rectangle(this, (Point)other);
         }
-        
+        if (other instanceof Volume) {
+            Point[] p = new Point[((Volume) other).getPoints().length + 1];
+            for (int i = 0; i < ((Volume) other).getPoints().length; i++)
+                p[i] = ((Volume) other).getPoints()[i];
+            p[((Volume) other).getPoints().length] = this;
+            return new Volume(p);
+        }
         return null;
     }
 
