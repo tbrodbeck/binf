@@ -57,7 +57,7 @@ public class Volume extends Geometry implements Comparable {
                 Point[] p = new Point[getPoints().length + 1];
                 for (int i = 0; i < getPoints().length; i++)
                     p[i] = getPoints()[i];
-                p[getPoints().length] = other;
+                p[getPoints().length] = ((Point)other);
                 return new Volume(p);
             }
         //packt alle Punkte dieses und des anderen Volumes in einen Array und erstellt damit ein Volume
@@ -138,10 +138,10 @@ public class Volume extends Geometry implements Comparable {
      * @return np Neue Punkte
      */
     public static Point[] minimumpoints(Point[] op) {
-        Point[] np = new Point{op[0]};
+        Point[] np = {op[0]};
         for(int i = 1; i < op.length; i++) {
             boolean schonda = false;
-            for(int j = 0; j < np.length(); j++) {
+            for(int j = 0; j < np.length; j++) {
                 if(op[i].getCoords() == np[j].getCoords())
                     schonda = true;
             }
