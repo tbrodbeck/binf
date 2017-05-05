@@ -20,13 +20,22 @@ public class Point extends Geometry implements Comparable{
         return coords;
     }
 
+
     @Override
     public double volume() {
         return 0;
     }
 
-    @Override
+    /**
+     * encapsulate(Geometry other) - Umgibt diese und die übergebene Geometry mit der gleichen Anzahl an Dimensionen mit
+     * einer neuen Geometry und gibt diese zurück. Die neue Geometry muss einerseits eine minimale Ausdehnung haben und
+     * andererseits diese und die übergebene Geometry vollständig enthalten. Wenn zwei Geometry - Instanzen eine
+     * unterschiedliche Anzahl an Dimensionen haben, wird null zurückgeliefert.
+     * @param var1
+     * @return
+     */
     public Geometry encapsulate(Geometry var1) {
+        if (dimensions() != var1.dimensions()) return null;
         return null;
     }
 
