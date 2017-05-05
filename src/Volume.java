@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Ein Volume kann durch zwei n-dimensionale Punkte erzeugt werden, die ein rechtwinkliges Volumen aufspannen, dessen Kanten
  * alle achsenparallel verlaufen.
@@ -26,14 +28,18 @@ public class Volume extends Geometry implements Comparable {
     public double volume() {
         double vol = 1;
         for (int dim = 0; dim < this.dimensions(); dim++){
+            // find the minimum and maximum values of the respecting dimension of each point
             double min = points[0].getCoords()[0];
             double max = min;
             for (Point p: points) {
+                // new min?
                 if (p.getCoords()[dim] < min)
                     min = p.getCoords()[dim];
+                // new max?
                 if (p.getCoords()[dim] > max)
                     max = p.getCoords()[dim];
             }
+            // multiply to the result
             vol *= max - min;
         }
         return vol;
@@ -93,5 +99,12 @@ public class Volume extends Geometry implements Comparable {
                 return 1;
         }
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Volume{" +
+                "points=" + Arrays.toString( points ) +
+                "} " + super.toString();
     }
 }

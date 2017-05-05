@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Repräsentiert einen n-dimensionalen Datenpunkt, der mit einer variablen Parameter-liste von double - Werten erzeugt werden
  * kann.
@@ -77,6 +79,13 @@ public class Point extends Geometry implements Comparable{
                 return 1;
         }
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "coords=" + Arrays.toString( coords ) +
+                "} " + super.toString();
     }
 }
 
