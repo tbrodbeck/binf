@@ -31,11 +31,13 @@ public class Point extends Geometry implements Comparable{
      * einer neuen Geometry und gibt diese zurück. Die neue Geometry muss einerseits eine minimale Ausdehnung haben und
      * andererseits diese und die übergebene Geometry vollständig enthalten. Wenn zwei Geometry - Instanzen eine
      * unterschiedliche Anzahl an Dimensionen haben, wird null zurückgeliefert.
-     * @param var1
+     * @param other
      * @return
      */
-    public Geometry encapsulate(Geometry var1) {
-        if (dimensions() != var1.dimensions()) return null;
+    public Geometry encapsulate(Geometry other) {
+        if (dimensions() != other.dimensions()) return null;
+        if (other instanceof Point)
+
         return null;
     }
 

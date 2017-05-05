@@ -15,7 +15,8 @@ public class Volume extends Geometry implements Comparable {
         super(points.length);
         this.points = points;
         for (Point p: points) {
-            if ( p.dimensions() != points.length)
+
+            if ( p.dimensions() >= points.length )
                 throw new RuntimeException("Dimensionen der Punkte stimmen nicht überein.");
         }
     }
@@ -46,7 +47,9 @@ public class Volume extends Geometry implements Comparable {
     }
 
     @Override
-    public Geometry encapsulate(Geometry geometry) {
+    public Geometry encapsulate(Geometry other) {
+        if (dimensions() != other.dimensions())
+            return null;
         return null;
     }
 
