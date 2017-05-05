@@ -13,7 +13,8 @@ public class Volume extends Geometry implements Comparable {
     
     public Volume(Point... points) {
         super(points.length);
-        this.points = points;
+        //lösche redundante Punkte
+        this.points = minimumpoints(points);
         // check if the points dimensions are bigger than the volumes dimension and if all of them are the same
         Point p1 = points[0];
         for (Point p: points) {
@@ -51,7 +52,25 @@ public class Volume extends Geometry implements Comparable {
     public Geometry encapsulate(Geometry other) {
         if (dimensions() != other.dimensions())
             return null;
-
+        //packt alle Punkte dieses Volumes und den gegeben Punkt in einen Array und erstellt damit ein Volume
+        if (other instanceof Point) {
+                Point[] p = new Point[getPoints().length + 1];
+                for (int i = 0; i < getPoints().length; i++)
+                    p[i] = getPoints()[i];
+                p[getPoints().length] = other;
+                return new Volume(p);
+            }
+        //packt alle Punkte dieses und des anderen Volumes in einen Array und erstellt damit ein Volume
+        if (other instanceof Volume) {
+            if(this.getPoints() == (((Volume) other).getPoints()))
+                return this;
+            Point[] p = new Point[getPoints().length + ((Volume) other).getPoints().length];
+            for (int i = 0; i < getPoints().length; i++)
+                p[i] = getPoints()[i];
+            for(int i = getPoints().length; i < getPoints().length +((Volume)other).getPoints().length; i++)
+                p[i] = ((Volume)other).getPoints()[i - getPoints().length];
+            return new Volume(p);
+        }
         return null;
     }
 
@@ -111,5 +130,28 @@ public class Volume extends Geometry implements Comparable {
         return "Volume{" +
                 "points=" + Arrays.toString( points ) +
                 "} " + super.toString();
+    }
+
+    /**
+     * Löscht die redundanten Punkte aus einem Array mit Punkten
+     * @param op Original Punkte
+     * @return np Neue Punkte
+     */
+    public static Point[] minimumpoints(Point[] op) {
+        Point[] np = new Point{op[0]};
+        for(int i = 1; i < op.length; i++) {
+            boolean schonda = false;
+            for(int j = 0; j < np.length(); j++) {
+                if(op[i].getCoords() == np[j].getCoords())
+                    schonda = true;
+            }
+            if (schonda = false) {
+                Point[] zp = new Point[np.length + 1];
+                for(int j = 0; j < np.length; j++)
+                    zp[j] = np[j];
+                zp[np.length] = op[i];
+            }
+        }
+        return np;
     }
 }
