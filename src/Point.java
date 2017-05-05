@@ -79,3 +79,5 @@ public class Point extends Geometry implements Comparable{
         return 0;
     }
 }
+
+//wäre es nicht fast klüger das der n-dimensionale Punkt den 2-dim. extended?  Siehe Circle Ellipse im Skript
