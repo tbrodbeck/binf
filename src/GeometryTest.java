@@ -29,13 +29,15 @@ public class GeometryTest {
         Point[] e2p = p_p2.getPoints();
         Point[] e2pt = ((Rectangle)encaps).getPoints();
         // gleiche Anzahl von Punkten
-        if (e2p.length != e2pt.length)
-            System.out.println("Fehler 5");
-        // gleiche Kordinaten der einzelnen Punkte
-        for (int i = 0; i < e2pt.length; i++) {
-            if (!e2p[i].getCoords().equals( e2pt[i].getCoords() ))
-                System.out.println("Fehler5_" + i);
+        if (e2p.length == e2pt.length) {
+            // gleiche Kordinaten der einzelnen Punkte
+            for (int i = 0; i < e2pt.length; i++) {
+                if (!e2p[i].getCoords().equals( e2pt[i].getCoords() ))
+                    System.out.println( "Fehler5_" + i );
+            }
         }
+        else
+            System.out.println( "Fehler 5" );
 
 //        System.out.println(p);
 //        System.out.println(p2d);
