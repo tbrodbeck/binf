@@ -9,67 +9,66 @@ import java.util.Arrays;
  */
 public class Volume extends Geometry implements Comparable {
 
-    private Point[] points;
+    private Point one;
+    private Point two;
     
-    public Volume(Point... points) {
-        super(points.length);
-        //lösche redundante Punkte
-        this.points = minimumpoints(points);
-        // check if the points dimensions are bigger than the volumes dimension and if all of them are the same
-        Point p1 = points[0];
-        for (Point p: points) {
-            if ( p.dimensions() < points.length || p.dimensions() != p1.dimensions() )
-                throw new RuntimeException("Dimensionen der Punkte stimmen nicht überein.");
-        }
+    public Volume(Point one, Point two) {
+        super(one.dimensions());
+        this.one = one;
+        this.two = two;
+        // check if the points dimensions differ
+        if (one.dimensions() != two.dimensions())
+            throw new RuntimeException("Dimensionen der Punkte stimmt nicht überein.");
     }
 
-    public Point[] getPoints() {
-        return points;
+    public Point getOne() {
+        return one;
     }
-    
+
+    public Point getTwo() {
+        return two;
+    }
+
     @Override
     public double volume() {
         double vol = 1;
         for (int dim = 0; dim < this.dimensions(); dim++){
             // find the minimum and maximum values of the respecting dimension of each point
-            double min = points[0].getCoords()[dim];
-            double max = min;
-            for (Point p: points) {
-                // new min?
-                if (p.getCoords()[dim] < min)
-                    min = p.getCoords()[dim];
-                // new max?
-                if (p.getCoords()[dim] > max)
-                    max = p.getCoords()[dim];
-            }
-            // multiply to the result
-            vol *= max - min;
+            vol *= one.getCoords()[dim] - two.getCoords()[dim];
         }
-        return vol;
+        return Math.abs( vol );
     }
 
     @Override
     public Geometry encapsulate(Geometry other) {
         if (dimensions() != other.dimensions())
             return null;
-        //packt alle Punkte dieses Volumes und den gegeben Punkt in einen Array und erstellt damit ein Volume
+
         if (other instanceof Point) {
-                Point[] p = new Point[getPoints().length + 1];
-                for (int i = 0; i < getPoints().length; i++)
-                    p[i] = getPoints()[i];
-                p[getPoints().length] = ((Point)other);
-                return new Volume(p);
+            // min und max aller Punkte in jeweiligen Dimensionsionen finden
+            double[] min = new double[dimensions()];
+            double[] max = new double[dimensions()];
+            for (int dim = 0; dim < this.dimensions(); dim++) {
+                Point p = (Point) other;
+                min[dim] = Math.min( Math.min( one.getCoords()[dim], two.getCoords()[dim] ), p.getCoords()[dim]);
+                max[dim] = Math.max( Math.max( one.getCoords()[dim], two.getCoords()[dim] ), p.getCoords()[dim]);
             }
-        //packt alle Punkte dieses und des anderen Volumes in einen Array und erstellt damit ein Volume
+
+            return new Volume( new Point( min ), new Point( max ) );
+        }
+
         if (other instanceof Volume) {
-            if(this.getPoints() == (((Volume) other).getPoints()))
-                return this;
-            Point[] p = new Point[getPoints().length + ((Volume) other).getPoints().length];
-            for (int i = 0; i < getPoints().length; i++)
-                p[i] = getPoints()[i];
-            for(int i = getPoints().length; i < getPoints().length +((Volume)other).getPoints().length; i++)
-                p[i] = ((Volume)other).getPoints()[i - getPoints().length];
-            return new Volume(p);
+            // min und max aller Punkte in jeweiligen Dimensionsionen finden
+            double[] min = new double[dimensions()];
+            double[] max = new double[dimensions()];
+            Volume o = (Volume)other;
+            for (int dim = 0; dim < this.dimensions(); dim++) {
+                min[dim] = Math.min( Math.min( one.getCoords()[dim], two.getCoords()[dim] ),
+                        Math.min(o.one.getCoords()[dim],o.two.getCoords()[dim]));
+                max[dim] = Math.max( Math.max( one.getCoords()[dim], two.getCoords()[dim] ),
+                        Math.max(o.one.getCoords()[dim],o.two.getCoords()[dim]));
+            }
+            return new Volume( new Point( min ), new Point( max ) );
         }
         return null;
     }
@@ -128,30 +127,9 @@ public class Volume extends Geometry implements Comparable {
     @Override
     public String toString() {
         return "Volume{" +
-                "points=" + Arrays.toString( points ) +
+                "one=" + one +
+                ", two=" + two +
                 "} " + super.toString();
     }
 
-    /**
-     * Löscht die redundanten Punkte aus einem Array mit Punkten
-     * @param op Original Punkte
-     * @return np Neue Punkte
-     */
-    public static Point[] minimumpoints(Point[] op) {
-        Point[] np = {op[0]};
-        for(int i = 1; i < op.length; i++) {
-            boolean schonda = false;
-            for(int j = 0; j < np.length; j++) {
-                if(op[i].getCoords() == np[j].getCoords())
-                    schonda = true;
-            }
-            if (schonda = false) {
-                Point[] zp = new Point[np.length + 1];
-                for(int j = 0; j < np.length; j++)
-                    zp[j] = np[j];
-                zp[np.length] = op[i];
-            }
-        }
-        return np;
-    }
 }

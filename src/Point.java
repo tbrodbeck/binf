@@ -7,7 +7,7 @@ import java.util.Arrays;
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 03.05.17
  */
-public class Point extends Geometry implements Comparable{
+public class Point extends Geometry implements Comparable {
 
     private double[] coords;
 
@@ -39,14 +39,11 @@ public class Point extends Geometry implements Comparable{
         if (other instanceof Point){
             if (((Point)other).getCoords() == getCoords())
                 return this;
-            return new Rectangle(this, (Point)other);
+            return new Volume(this, (Point)other);
         }
         if (other instanceof Volume) {
-            Point[] p = new Point[((Volume) other).getPoints().length + 1];
-            for (int i = 0; i < ((Volume) other).getPoints().length; i++)
-                p[i] = ((Volume) other).getPoints()[i];
-            p[((Volume) other).getPoints().length] = this;
-            return new Volume(p);
+            Volume o = (Volume)other;
+            return o.encapsulate(this );
         }
         return null;
     }
