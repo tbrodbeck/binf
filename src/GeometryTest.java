@@ -39,6 +39,23 @@ public class GeometryTest {
         else
             System.out.println( "Fehler 5" );
 
+        // Teste encapsulate für einen Punkt und ein Volumen
+        Point p3 = new Point(1,1,1);
+        Volume v1 = new Volume(p3,p);
+        Geometry encaps2 = p2.encapsulate(v1);
+        Geometry encaps3 = v1.encapsulate(p2);
+        Geometry encapsTest = new Volume(p,p2,p3);
+        if(!(encaps2.equals(encapsTest))) System.out.print("Fehler6");
+        if(!(encaps3.equals(encapsTest))) System.out.print("Fehler7");
+        Point p4 = new Point(1,1,1);
+        Geometry encaps4 = p4.encapsulate(v1);
+        Geometry encaps5 = v1.encapsulate(p4);
+        if(!encaps4.equals(v1)) System.out.println("Fehler8");
+        if(!encaps5.equals(v1)) System.out.println("Fehler9");
+
+
+        // Teste encapsulate für 2 Volumen
+
 //        System.out.println(p);
 //        System.out.println(p2d);
 //        System.out.println(v);
