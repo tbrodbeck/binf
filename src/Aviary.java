@@ -7,15 +7,15 @@ public class Aviary {
 
    public static void main(String[] args) {
       Dodo dodo = new Dodo();
-      // Variablen statisch gebunden + Typecast
+      // Durch die Typanpassung und die statische Bindung von Variablen wird ability der Oberklasse benutzt
       System.out.println("1: ((Bird)dodo).ability           : " + ((Bird) dodo).ability);
-      //Vom Typ Dodo + statisch gebundene Variabel
+      //Vom Typ Dodo + statisch gebundene Variable -> ability der Klasse Dodo
       System.out.println("2: dodo.ability                   : " + dodo.ability);
-      //getAbility() in der Klasse Dodo ruft nur getAbility() von Bird/der Oberklasse auf welche als Ability nur Fly kennt
+      //getAbility() in der Klasse Dodo ruft nur getAbility() der Oberklasse auf welche als Ability nur Fly kennt
       System.out.println("3: dodo.getAbility()              : " + dodo.getAbility());
       Parrot parrot = new Parrot();
-      //allAbilities gibt allAbilities der Oberklasse (also die Ability der Oberklasse/Fly) + und die Ability der Klasse
-      //Parrot/Talk zurück
+      //allAbilities() ist eigentlich überschrieben, die Methode der Unterklasse ruft jedoch allAbilities() der
+      //Oberklasse (also die Ability der Oberklasse (Fly)) + und die Ability der Klasse Parrot (Talk) zurück
       System.out.println("4: parrot.allAbilities            : " + parrot.allAbilities());
       //gibt statisch gebundene Variable Ability des Parrots zurück
       System.out.println("5: parrot.ability                 : " + parrot.ability);
@@ -24,7 +24,7 @@ public class Aviary {
       //Variable Ability wird statisch gebunden + Compiler weiß nur das Carsten ein Bird ist
       System.out.println("6: carsten.ability                : " + carsten.ability);
       //Methode allAbilites() wird dynamisch gebunden da hilft auch der Typecast nichts, bei Dodo gibt allAbilities() nur
-       // Instanzvariable ability zurück
+      // Instanzvariable ability zurück
       System.out.println("7: ((Bird)carsten).allAbilities() : " + ((Bird) carsten).allAbilities());
 
       Bird einstein = parrot;
