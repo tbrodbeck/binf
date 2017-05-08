@@ -40,6 +40,7 @@ public class GeometryTest {
         // Test encapsulate() von Volumen auf Punkt
         if (((Volume)(v.encapsulate( p3_2 ))).compareTo(new Volume( p3_2, new Point( 5, 6, 7 ))) != 0)
             System.out.println("Fehler7");
+        // Test encapsulate() von Volumen auf Volumen
         if (((Volume)(v.encapsulate( v2))).compareTo(new Volume( p3, new Point( 4, 5, 6))) != 0)
             System.out.println("Fehler8");
 

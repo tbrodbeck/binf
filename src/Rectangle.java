@@ -11,9 +11,4 @@ public class Rectangle extends Volume {
         if(p1.dimensions() != 2)
             throw new RuntimeException( "Punkte sind nicht zweidimensional" );
     }
-
-    @Override
-    public Geometry encapsulate(Geometry other) {
-        return (Rectangle)(super.encapsulate( other ));
-    }
 }
