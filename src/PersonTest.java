@@ -75,6 +75,7 @@ public class PersonTest {
             System.out.println("equals nicht transitiv für Student & Person");
     }
 
-//Lösungsvorschläge: Equals sollte die Methode hashCode() zum Vergleichen benutzen und nicht den Namen / Namen und MatNr
-// da Studenten und Personen generell andere hashCodes erzeugen
+//Lösungsvorschlag: Equals sollte die Methode hashCode() zum Vergleichen benutzen und nicht den Namen / Namen und MatNr,
+// da Studenten und Personen generell andere hashCodes erzeugen und somit Studenten und Personen nicht gleich
+// sein könnten und wir kein Problem bei der Symetrie & Transitivität haben würden
 }
