@@ -1,3 +1,5 @@
+package blatt03;
+
 import java.util.Arrays;
 
 /**

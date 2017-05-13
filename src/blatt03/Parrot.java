@@ -1,3 +1,4 @@
+package blatt03;
 
 /**
  * A Parrot is a kind of bird. They are among the most intelligent birds.

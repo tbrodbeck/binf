@@ -1,3 +1,5 @@
+package blatt03;
+
 /**
  * Ein zweidimensionaler Punkt der mit zwei double - Werten erzeugt werden kann.
  *

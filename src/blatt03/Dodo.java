@@ -1,3 +1,4 @@
+package blatt03;
 
 /**
  * A Dodo is a flightless bird from Mauritius who died out in 1690.

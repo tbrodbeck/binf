@@ -1,3 +1,5 @@
+package blatt03;
+
 /**
  * Schreiben Sie außerdem eine separate Testklasse, die automatisch jede der implementierten Funktionen testet.
  *

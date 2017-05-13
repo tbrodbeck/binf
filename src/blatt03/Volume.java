@@ -1,4 +1,4 @@
-import java.util.Arrays;
+package blatt03;
 
 /**
  * Ein Volume kann durch zwei n-dimensionale Punkte erzeugt werden, die ein rechtwinkliges Volumen aufspannen, dessen Kanten

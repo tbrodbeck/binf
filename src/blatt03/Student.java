@@ -1,3 +1,5 @@
+package blatt03;
+
 /**
  * Class representing a student.
  *

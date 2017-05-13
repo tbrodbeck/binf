@@ -1,3 +1,5 @@
+package blatt03;
+
 /**
  * Ein Rechteck, das mit zwei Objekten vom Typ Point2D erzeugt werden kann.
  *
