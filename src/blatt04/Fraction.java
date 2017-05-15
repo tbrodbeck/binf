@@ -5,67 +5,11 @@ package blatt04;
  * @version 06/04/2017.
  * Implementieren Sie die Klasse Fraction mit den beiden Instanzvariablen
  * numerator und denominator zur Repräsentation eines Bruches.
- *
- * Lassen Sie die Klasse Fraction vom vorletzten Aufgabenblatt von der Klasse
- * Number aus der Java API erben und implementieren sie alle abstrakten Methoden.
- * Erweitern Sie nun den Bruchrechner vom letzten Aufgabenblatt um die Möglichkeit
- * nicht nur zwei Brüche, sondern auch natürliche und Fließkommazahlen beliebig
- * miteinander zu verknüpfen. Die Ausgabe soll stets eine Fließkommazahl sein,
- * es sei denn, zwei Brüche wurden eingegeben. In diesem Fall soll die Ausgabe
- * in der Form eines Bruches (z.B. 4/1) erfolgen.
  */
 public class Fraction extends Number {
 
     private int numerator;
     private int denominator;
-
-    /**
-     * Returns the value of the specified number as an {@code int},
-     * which may involve rounding or truncation.
-     *
-     * @return the numeric value represented by this object after conversion
-     * to type {@code int}.
-     */
-    @Override
-    public int intValue() {
-        return 0;
-    }
-
-    /**
-     * Returns the value of the specified number as a {@code long},
-     * which may involve rounding or truncation.
-     *
-     * @return the numeric value represented by this object after conversion
-     * to type {@code long}.
-     */
-    @Override
-    public long longValue() {
-        return 0;
-    }
-
-    /**
-     * Returns the value of the specified number as a {@code float},
-     * which may involve rounding.
-     *
-     * @return the numeric value represented by this object after conversion
-     * to type {@code float}.
-     */
-    @Override
-    public float floatValue() {
-        return 0;
-    }
-
-    /**
-     * Returns the value of the specified number as a {@code double},
-     * which may involve rounding.
-     *
-     * @return the numeric value represented by this object after conversion
-     * to type {@code double}.
-     */
-    @Override
-    public double doubleValue() {
-        return 0;
-    }
 
     /**
      * Es soll zwei Konstruktoren geben, die den Bruch bei der Instanziierung
@@ -163,11 +107,15 @@ public class Fraction extends Number {
      * @param addend
      */
     public Fraction add(Fraction addend) {
-        return null;
+        int de = denominator*addend.numerator+addend.denominator * numerator;
+        Fraction neu = new Fraction(numerator*addend.numerator,de);
+        return neu;
     }
 
     public Fraction substract(Fraction subtrahend) {
-        return null;
+        int de = denominator*subtrahend.numerator-subtrahend.denominator * numerator;
+        Fraction neu = new Fraction(numerator*subtrahend.numerator,de);
+        return neu;
     }
 
     /**
@@ -181,22 +129,66 @@ public class Fraction extends Number {
      *  Verarbeitung des String seine Methode split und die Methode Integer.parseInt vom letzten
      *  Aufgabenblatt.
      * @param text
-     * @return
+     * @return Fraction
      */
-    public Fraction parseFraction(String text) {
-        if (text.matches("-?//d+/[1-9]//d*")) {
 
-            String[] s = text.split("/");
-            Integer.getInteger(s[0]);
-        }
-                System.out.println("geklappt");
-        return null;
+    public static Fraction parseFraction(String text) {
+        int numerator, denominator;
+            if (text.matches("(-?)(\\d+)(\\/)([1-9])(\\d*)")) {
+                String[] s = text.split("/");
+                numerator = Integer.getInteger(s[0]);
+                denominator = Integer.getInteger(s[1]);
+            }
+            else throw new RuntimeException("String stellt keinen Bruch da bitte nächstes Mal Sting der Form: (-)Nenner/Zähler");
+        return new Fraction(numerator, denominator);
     }
 
-}
 
-/*
-Erstellen Sie anschließend eine ausführbare jar-Datei, mit der alleine der Bruchrechner
-ausgeführt werden kann. Notieren Sie für Ihren Tutor was die nötigen Schritte waren
-um die jar-Datei zu erzeugen und wie sie inhaltlich aufgebaut ist.
- */
+    /**
+     * Returns the value of the specified number as an {@code int},
+     * which may involve rounding or truncation.
+     *
+     * @return the numeric value represented by this object after conversion
+     * to type {@code int}.
+     */
+    @Override
+    public int intValue() {
+        return 0;
+    }
+
+    /**
+     * Returns the value of the specified number as a {@code long},
+     * which may involve rounding or truncation.
+     *
+     * @return the numeric value represented by this object after conversion
+     * to type {@code long}.
+     */
+    @Override
+    public long longValue() {
+        return 0;
+    }
+
+    /**
+     * Returns the value of the specified number as a {@code float},
+     * which may involve rounding.
+     *
+     * @return the numeric value represented by this object after conversion
+     * to type {@code float}.
+     */
+    @Override
+    public float floatValue() {
+        return 0;
+    }
+
+    /**
+     * Returns the value of the specified number as a {@code double},
+     * which may involve rounding.
+     *
+     * @return the numeric value represented by this object after conversion
+     * to type {@code double}.
+     */
+    @Override
+    public double doubleValue() {
+        return 0;
+    }
+}
