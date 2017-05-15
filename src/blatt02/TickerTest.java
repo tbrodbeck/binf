@@ -11,8 +11,8 @@ package blatt02;
 public class TickerTest {
 
     public static void main(String[] args) {
-        System.out.println("Erwarteter String: \n+++Java Inc. 555.6+++Zahnpasta in your Face 10.0+++Nutella GmBH 66.6+++Fussball ABC 0.1");
-        System.out.println("Zeitlich unberechenbarer String: \n+++Insolvenz von Zahnpasta in your Face bekanntgegeben.+++Insolvenz von Java Inc. bekanntgegeben.+++Insolvenz von Mitsubishi CoKG bekanntgegeben.");
+        System.out.println("Erwarteter String: \n+++Java Inc. 555.6+++Zahnpasta in your Face 10.0+++Nutella GmBH 66.6+++Fussball ABC 0.1+++Insolvenz von Fussball ABC bekanntgegeben.");
+        System.out.println("Unberechenbarer String: \n+++Insolvenz von Zahnpasta in your Face bekanntgegeben.+++Insolvenz von Java Inc. bekanntgegeben.+++Insolvenz von Mitsubishi CoKG bekanntgegeben.");
         System.out.println("Test:");
         Company java = new Company("Java Inc.");
         Company nutella = new Company("Nutella GmBH");
@@ -22,8 +22,8 @@ public class TickerTest {
         testMethode();
         nutella.changeStockPrice(66.6);
         fussball.changeStockPrice(0.1);
+        fussball.finalize(); // finalize wird getestet
         System.gc(); // Garbage Collector wird implizit gerufen
-        // -> mitsubishi wird eingesammelt
 
 
     }
@@ -33,6 +33,6 @@ public class TickerTest {
         Company zahnpasta = new Company("Zahnpasta in your Face");
         zahnpasta.changeStockPrice(10.0);
         zahnpasta = null;
-        System.gc(); // -> java und zahnpasta werden eingesammelt
+        System.gc();
     }
 }

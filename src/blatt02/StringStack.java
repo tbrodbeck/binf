@@ -13,6 +13,11 @@ public class StringStack {
       this.first = null;
    }
 
+   /**
+    * Ergänzen Sie den Quellcode um einen Copy-Constructor, mit dem es ermöglicht wird, eine Kopie des übergebenen
+    * StringStack zu erzeugen
+    * @return StringStack
+     */
    public StringStack(StringStack s){
       this();
       StringStack umkehr = new StringStack();
@@ -88,4 +93,22 @@ public class StringStack {
       }
    }
 
+   /**
+    * gibt den Inhalt des Kellers in der Form: tiefstes Element ... erstes Element als String zurück
+    * @return String
+    */
+   public String toString() {
+      StringStack umkehr = new StringStack();
+      String string = "";
+      while(!empty()) {
+         umkehr.push(peek());
+         pop();
+      }
+      while(!umkehr.empty()){
+         string += umkehr.peek() + " ";
+         push(umkehr.peek());
+         umkehr.pop();
+      }
+      return string;
+   }
 }
