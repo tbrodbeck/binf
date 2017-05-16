@@ -28,7 +28,7 @@ public class LibraryTest {
 
 
         // test
-
+        // addItem
         lib1.addItem( lotr );
         lib1.addItem( lotrB );
         lib1.addItem( spotlight );
@@ -38,7 +38,7 @@ public class LibraryTest {
         lib2.addItem( hp );
         lib2.addItem( lotrB );
 
-        // search testen
+        // search
         List sear1 = lib1.search("Lord Of The Rings");
         if (sear1.empty())
             System.out.println("Fehler0");
@@ -49,14 +49,14 @@ public class LibraryTest {
             sear1.advance();
         }
 
-        // delete testen
+        // delete
         lib1.deleteItem( lotr );
         lib1.deleteItem( lotrB );
         List sear2 = lib1.search("Lord Of The Rings");
         if(!sear2.empty())
             System.out.println("Fehler2");
 
-        // getDescription im Detail
+        // getDescription
         if (!lotr.getDescription().equals( "BluRay - Title: Lord Of The Rings, Director: Peter Jackson" ))
             System.out.println("Fehler3");
         if (!lotrB.getDescription().equals( "Book - Title: Lord of The Rings, Author: Tolkiens" ))
