@@ -205,7 +205,7 @@ public class Fraction extends Number{
      */
     @Override
     public int intValue() {
-        return numerator / denominator;
+        return (int)(numerator / denominator);
     }
 
     /**

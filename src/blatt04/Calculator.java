@@ -174,7 +174,12 @@ public class Calculator {
      * @return Bruch
      */
    public Fraction calc(double a, String operator, double b) {
-        return null;
+        int i = (int)(a/b);
+        Fraction af = new Fraction(i,1);
+        Fraction bf = new Fraction(1,1);
+
+        return calc(af, operator, bf);
+
    }
 
 
