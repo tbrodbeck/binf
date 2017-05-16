@@ -107,11 +107,15 @@ public class Fraction {
      * @param addend
      */
     public Fraction add(Fraction addend) {
-        return null;
+        int de = denominator*addend.numerator+addend.denominator * numerator;
+        Fraction neu = new Fraction(numerator*addend.numerator,de);
+        return neu;
     }
 
     public Fraction substract(Fraction subtrahend) {
-        return null;
+        int de = denominator*subtrahend.numerator-subtrahend.denominator * numerator;
+        Fraction neu = new Fraction(numerator*subtrahend.numerator,de);
+        return neu;
     }
 
     /**
@@ -125,16 +129,19 @@ public class Fraction {
      *  Verarbeitung des String seine Methode split und die Methode Integer.parseInt vom letzten
      *  Aufgabenblatt.
      * @param text
-     * @return
+     * @return Fraction
      */
-    public Fraction parseFraction(String text) {
-        if (text.matches("-?//d+/[1-9]//d*")) {
 
-            String[] s = text.split("/");
-            Integer.getInteger(s[0]);
-        }
-                System.out.println("geklappt");
-        return null;
+    public static Fraction parseFraction(String text) {
+        int numerator, denominator;
+            if (text.matches("(-?)(\\d+)(\\/)([1-9])(\\d*)")) {
+                String[] s = text.split("/");
+                numerator = Integer.getInteger(s[0]);
+                denominator = Integer.getInteger(s[1]);
+            }
+            else throw new RuntimeException("String stellt keinen Bruch da bitte nächstes Mal Sting der Form: (-)Nenner/Zähler");
+        return new Fraction(numerator, denominator);
     }
+
 
 }
