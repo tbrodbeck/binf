@@ -217,7 +217,7 @@ public class Fraction extends Number{
      */
     @Override
     public long longValue() {
-        return numerator / denominator;
+        return (long)(numerator / denominator);
     }
 
     /**
@@ -229,7 +229,7 @@ public class Fraction extends Number{
      */
     @Override
     public float floatValue() {
-        return numerator / denominator;
+        return (float)(numerator / denominator);
     }
 
     /**
@@ -241,6 +241,6 @@ public class Fraction extends Number{
      */
     @Override
     public double doubleValue() {
-        return numerator / denominator;
+        return (double)(numerator / denominator);
     }
 }
