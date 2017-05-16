@@ -112,8 +112,18 @@ public class Calculator {
       Fraction fractionA = parseFraction(a);
       Fraction fractionB = parseFraction(b);
 
-      if (fractionA == null || fractionB == null || operator == null) {
-         return null;
+      if (operator == null)
+          return null;
+
+      if (fractionA == null || fractionB == null) {
+          // falls es Gleitkommaargumente sind
+         double da = Double.parseDouble( a );
+         double db = Double.parseDouble( b );
+         Fraction result2 = calc(da, operator, db);
+         if (result2 == null) {
+              return null;
+         }
+         return result2.toString();
       }
 
       Fraction result = calc(fractionA, operator, fractionB);
@@ -146,11 +156,27 @@ public class Calculator {
     */
    private Fraction parseFraction(String fraction) {
       if (!fraction.matches(Fraction.REGEX)) {
-         errorMessage = fraction + " is not a valid Fraction";
          return null;
       }
       return Fraction.parseFraction(fraction);
 
    }
+
+
+    /**
+     * Erweitern Sie nun den Bruchrechner vom letzten Aufgabenblatt um die Möglichkeit nicht nur zwei Brüche, sondern
+     * auch natürliche und Fließkommazahlen beliebig miteinander zu verknüpfen. Die Ausgabe soll stets eine
+     * Fließkommazahl sein, es sei denn, zwei Brüche wurden eingegeben. In diesem Fall soll die Ausgabe in der Form
+     * eines Bruches (z.B. 4/1) erfolgen.
+     * @param a erstes Fließkommaargument
+     * @param operator
+     * @param b zweites Fließkommaargument
+     * @return Bruch
+     */
+   public Fraction calc(double a, String operator, double b) {
+        return null;
+   }
+
+
 
 }

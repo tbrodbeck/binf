@@ -7,7 +7,7 @@ package blatt04;
  * @author Mathias Menninghaus (mathias.menninghaus@uos.de)
  * 
  */
-public class Fraction {
+public class Fraction extends Number{
 
    /**
     * The regular expression that defines the String representation of a
@@ -184,6 +184,9 @@ public class Fraction {
 
 
    /**
+    * Lassen Sie die Klasse Fraction vom vorletzten Aufgabenblatt von der Klasse Number aus der Java API erben und
+    * implementieren sie alle abstrakten Methoden.
+    *
     * Returns a string representation of this Fraction such as
     * numerator/denominator.
     * 
@@ -192,4 +195,52 @@ public class Fraction {
    public String toString() {
       return numerator + "/" + denominator;
    }
+
+    /**
+     * Returns the value of the specified number as an {@code int},
+     * which may involve rounding or truncation.
+     *
+     * @return the numeric value represented by this object after conversion
+     * to type {@code int}.
+     */
+    @Override
+    public int intValue() {
+        return numerator / denominator;
+    }
+
+    /**
+     * Returns the value of the specified number as a {@code long},
+     * which may involve rounding or truncation.
+     *
+     * @return the numeric value represented by this object after conversion
+     * to type {@code long}.
+     */
+    @Override
+    public long longValue() {
+        return numerator / denominator;
+    }
+
+    /**
+     * Returns the value of the specified number as a {@code float},
+     * which may involve rounding.
+     *
+     * @return the numeric value represented by this object after conversion
+     * to type {@code float}.
+     */
+    @Override
+    public float floatValue() {
+        return numerator / denominator;
+    }
+
+    /**
+     * Returns the value of the specified number as a {@code double},
+     * which may involve rounding.
+     *
+     * @return the numeric value represented by this object after conversion
+     * to type {@code double}.
+     */
+    @Override
+    public double doubleValue() {
+        return numerator / denominator;
+    }
 }
