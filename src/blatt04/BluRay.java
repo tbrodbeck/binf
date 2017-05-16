@@ -24,6 +24,6 @@ public class BluRay extends LibraryItem{
 
     @Override
     public String getDescription(){
-        return "BluRay: Title: " + title + ", Director: " + director;
+        return "BluRay - Title: " + title + ", Director: " + director;
     }
 }

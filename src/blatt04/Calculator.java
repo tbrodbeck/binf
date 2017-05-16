@@ -11,7 +11,7 @@ public class Calculator {
    /*
     * The Operators
     */
-   public static final String ADD = "+"™
+   public static final String ADD = "+";
    public static final String SUBSTRACT = "-";
    public static final String MULTIPLY = "*";
    public static final String DIVIDE = "/";

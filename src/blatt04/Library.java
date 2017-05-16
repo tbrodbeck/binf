@@ -36,11 +36,11 @@ public class Library {
         boolean gefunden = false;
         while (!inv.endpos()) {
             if (inv.elem() == item) {
-                ((LibraryItem)inv.elem()).setBorrowed( false );
                 inv.delete();
                 gefunden = true;
             }
-            inv.advance();
+            if(!gefunden)
+                inv.advance();
         }
         if (!gefunden)
             throw new RuntimeException( "item nicht gelöscht!" );

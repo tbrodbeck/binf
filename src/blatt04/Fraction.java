@@ -1,194 +1,195 @@
 package blatt04;
 
 /**
- * @author Ronja von Kittlitz, Tillmann Brodbeck
- * @version 06/04/2017.
- * Implementieren Sie die Klasse Fraction mit den beiden Instanzvariablen
- * numerator und denominator zur Repräsentation eines Bruches.
+ * Every instance of Fraction represents a fraction with numerator and
+ * decorator.
+ * 
+ * @author Mathias Menninghaus (mathias.menninghaus@uos.de)
+ * 
  */
-public class Fraction extends Number {
+public class Fraction {
 
-    private int numerator;
-    private int denominator;
+   /**
+    * The regular expression that defines the String representation of a
+    * Fraction.
+    */
+   public static final String REGEX = "-?\\d+/\\d*[1-9]\\d*";
 
-    /**
-     * Es soll zwei Konstruktoren geben, die den Bruch bei der Instanziierung
-     * kürzen. Einer, der mit Nenner und Zähler aufgerufen wird.
-     * @param numerator nenner
-     * @param denominator zaehler
-     */
-    public Fraction(int numerator, int denominator) {
-        if(denominator == 0) throw new RuntimeException("Nenner darf nicht null sein");
-        int ggT = ggT(denominator, numerator);
-        this.numerator = numerator/ggT;
-        this.denominator = denominator/ggT;
-    }
+   /**
+    * Creates greatest common divisor for a and b.
+    * 
+    * @param a
+    * @param b
+    * @return the greatest common divisor for a and b.
+    */
+   public static int gcd(int a, int b) {
+      return b == 0 ? a : gcd(b, a % b);
 
-    /**
-     * und ein zweiter, der eine ganze Zahl annimmt und den Nenner auf 1 setzt
-     * Verketten Sie die Konstruktoren.
-     * @param numerator ganze Zahl
-     */
-    public Fraction(int numerator) {
-        this(numerator, 1);
-    }
+   }
 
-    /**
-     * Implementieren Sie zusätzlich die folgenden Instanzmethoden, die bei der
-     * Ausführung der entsprechenden numerischen Operation immer eine neue
-     * Fraction erzeugen.
-     * @param factor multiplikativer Faktor
-     * @return multiplizierter Bruch
-     */
-    Fraction multiply(int factor) {
-        Fraction neu = new Fraction( numerator * factor, denominator);
-        return neu;
-    }
+   /**
+    * Parses a Fraction from a String by using REGEX. Throws RuntimeException if String s does
+    * not contain valid Fraction.
+    * 
+    * @param s
+    *           String to be parsed
+    * @return parsed String as Fraction
+    * @throws RuntimeException
+    *            if String s is not a valid Fraction
+    */
+   public static Fraction parseFraction(String s) {
+      if (!s.matches(REGEX)) {
+         throw new RuntimeException("Parsing error");
+      }
+      String[] splitted = s.split("/");
+      return new Fraction(Integer.parseInt(splitted[0]),
+            Integer.parseInt(splitted[1]));
+   }
 
-    /**
-     * Multiplikation mit anderem Bruch
-     * @param factor multiplizierender Bruch
-     * @return Ergebnis-Bruch
-     */
-    Fraction multiply(Fraction factor) {
-        Fraction neu = new Fraction(numerator * factor.numerator, denominator * factor.denominator);
-        return neu;
-    }
+   private int numerator;
 
-    /**
-     * Dabei erwartet die Methode multiply(Fraction... factors) eine variable
-     * Liste von Fraction Instanzen. D.h. sie kann mit beliebig vielen
-     * Argumenten vom Typ Fraction aufgerufen werden. Machen Sie es möglich,
-     * eine Instanz mit der Methode String toString() als String (z.B.1/4)
-     * auszugeben.
-     * @param factors
-     * @return
-     */
-    Fraction multiply(Fraction... factors) {
-        Fraction neu = this.multiply(new Fraction(1));
-        for(Fraction f : factors) {
-            neu = neu.multiply(f);
-        }
-        return neu;
-    }
+   private int denominator;
 
-    /**
-     * toString() Methode
-     * @return Nenner / Teiler
-     */
-    public String toString() {
-        return(numerator + "/" + denominator);
-    }
+   /**
+    * Creates a Fraction object with numerator and denominator 1, cancels the
+    * fraction with creation.
+    * 
+    * @param numerator
+    */
+   public Fraction(int numerator) {
+      this(numerator, 1);
+   }
 
-    /**
-     * Division mit anderem Bruch
-     * @param divisor teilender Bruch
-     * @return Ergebnis-Bruch
-     */
-    public Fraction divide(Fraction divisor){
-        return new Fraction(numerator*divisor.denominator, denominator *divisor.numerator);
-    }
+   /**
+    * Creates a Fraction object with numerator and denominator, cancels the
+    * fraction by creation. Denominator == 0 is not allowed.
+    * 
+    * @param numerator
+    * @param denominator
+    */
+   public Fraction(int numerator, int denominator) {
+      if (denominator == 0) {
+         throw new RuntimeException("denominator == 0 is not possible");
+      }
 
-    /**
-     * berechnet den größten gemeinsamen Teiler wie aus Info A bekannt
-     * @param i 1. Zahl
-     * @param j 2. Zahl
-     * @return größter gemeinsamer Teiler
-     */
-    private int ggT(int i, int j) {
-        if(j == 0) return i;
-        return ggT(j, i%j);
-    }
+      /*
+       * creates greatest common divisior.
+       */
+      int gcd = Fraction.gcd(numerator, denominator);
+      /*
+       * check sign, make denominator positive
+       */
+      if (denominator / gcd < 0) {
+         gcd *= -1;
+      }
 
-    /**
-     * Erweitern Sie die Klasse Fraction von Blatt 1 um die Methoden add(Fraction addend) und
-     * substract(Fraction subtrahend), die die übergebene Fraction addieren bzw. subtrahieren und das
-     * Ergebnis als neue Fraction zurückgeben.
-     * @param addend
-     */
-    public Fraction add(Fraction addend) {
-        int de = denominator*addend.numerator+addend.denominator * numerator;
-        Fraction neu = new Fraction(numerator*addend.numerator,de);
-        return neu;
-    }
+      this.numerator = numerator / gcd;
 
-    public Fraction substract(Fraction subtrahend) {
-        int de = denominator*subtrahend.numerator-subtrahend.denominator * numerator;
-        Fraction neu = new Fraction(numerator*subtrahend.numerator,de);
-        return neu;
-    }
+      this.denominator = denominator / gcd;
+   }
 
-    /**
-     *  Implementieren Sie zusätzlich die Klassenmethode parseFraction, die eine Fraction wie von der
-     *  toString-Methode ausgegeben übergeben bekommt und die passende Instanz vom Typ Fraction
-     *  zurückliefert. Um zu überprüfen, ob der übergebene String einen korrekten Bruch darstellt, sollen
-     *  Sie die Methode matches(String regex) der Klasse String benutzen und für regex einen passenden
-     *  regulären Ausdruck einsetzen. Erklären Sie Ihrem Tutor, welche Funktion die einzelnen Komponenten
-     *  Ihres regulären Ausdrucks haben. In der Dokumentation der Klasse Pattern aus der Java-API ﬁnden
-     *  sie alles Wissenswerte über die Generierung eines regulären Ausdrucks in Java. Nutzen Sie zur
-     *  Verarbeitung des String seine Methode split und die Methode Integer.parseInt vom letzten
-     *  Aufgabenblatt.
-     * @param text
-     * @return Fraction
-     */
+   /**
+    * Adds addend to this Fraction and return the result as a new Fraction.
+    * 
+    * @param addend
+    *           Fraction to be added
+    * @return the sum as a new Fraction
+    */
+   public Fraction add(Fraction addend) {
+      return new Fraction(this.numerator * addend.denominator
+            + this.denominator * addend.numerator, this.denominator
+            * addend.denominator);
+   }
 
-    public static Fraction parseFraction(String text) {
-        int numerator, denominator;
-            if (text.matches("(-?)(\\d+)(\\/)([1-9])(\\d*)")) {
-                String[] s = text.split("/");
-                numerator = Integer.getInteger(s[0]);
-                denominator = Integer.getInteger(s[1]);
-            }
-            else throw new RuntimeException("String stellt keinen Bruch da bitte nächstes Mal Sting der Form: (-)Nenner/Zähler");
-        return new Fraction(numerator, denominator);
-    }
+   /**
+    * Divides this Fraction with another Fraction
+    * 
+    * @param another
+    *           Fraction to divide this Fraction by
+    * @return quotient as a new Fraction
+    */
+   public Fraction divide(Fraction another) {
+      return new Fraction(this.numerator * another.denominator,
+            this.denominator * another.numerator);
+   }
+
+   /**
+    * 
+    * @return denominator of this Fraction
+    */
+   public int getDenominator() {
+      return this.denominator;
+   }
+
+   /**
+    * 
+    * @return numerator of this Fraction
+    */
+   public int getNumerator() {
+      return this.numerator;
+   }
+
+   /**
+    * Multiplies this Fraction with another Fraction
+    * 
+    * @param another
+    *           Fraction to multiply this Fraction with
+    * @return product as a new Fraction
+    */
+   public Fraction multiply(Fraction another) {
+      return new Fraction(this.numerator * another.numerator, this.denominator
+            * another.denominator);
+   }
+
+   /**
+    * Multiplies this Fraction with n.
+    * 
+    * @param n
+    *           factor to multiply with
+    * @return product as a new Fraction
+    */
+   public Fraction multiply(int n) {
+      return new Fraction(this.numerator * n, this.denominator);
+   }
+
+   /**
+    * Multiplies this Fraction with all other Fraction instances given by
+    * factors
+    * 
+    * @param factors
+    *           Fraction instances to multiply this Fraction with
+    * @return product as a new Fraction
+    */
+   public Fraction multiply(Fraction... factors) {
+      Fraction result = this;
+      for (int i = 0; i < factors.length; i++) {
+         result = result.multiply(factors[i]);
+      }
+      return result;
+   }
+   
+   /**
+    * Subtracts subtrahend from this Fraction an returns the result as a new
+    * Fraction.
+    * 
+    * @param subtrahend
+    *           to be subtracted Fraction
+    * @return the difference as a new Fraction
+    */
+   public Fraction subtract(Fraction subtrahend) {
+      return new Fraction(this.numerator * subtrahend.denominator
+            - this.denominator * subtrahend.numerator, this.denominator
+            * subtrahend.denominator);
+   }
 
 
-    /**
-     * Returns the value of the specified number as an {@code int},
-     * which may involve rounding or truncation.
-     *
-     * @return the numeric value represented by this object after conversion
-     * to type {@code int}.
-     */
-    @Override
-    public int intValue() {
-        return 0;
-    }
-
-    /**
-     * Returns the value of the specified number as a {@code long},
-     * which may involve rounding or truncation.
-     *
-     * @return the numeric value represented by this object after conversion
-     * to type {@code long}.
-     */
-    @Override
-    public long longValue() {
-        return 0;
-    }
-
-    /**
-     * Returns the value of the specified number as a {@code float},
-     * which may involve rounding.
-     *
-     * @return the numeric value represented by this object after conversion
-     * to type {@code float}.
-     */
-    @Override
-    public float floatValue() {
-        return 0;
-    }
-
-    /**
-     * Returns the value of the specified number as a {@code double},
-     * which may involve rounding.
-     *
-     * @return the numeric value represented by this object after conversion
-     * to type {@code double}.
-     */
-    @Override
-    public double doubleValue() {
-        return 0;
-    }
+   /**
+    * Returns a string representation of this Fraction such as
+    * numerator/denominator.
+    * 
+    * @return This Fraction as a String
+    */
+   public String toString() {
+      return numerator + "/" + denominator;
+   }
 }
