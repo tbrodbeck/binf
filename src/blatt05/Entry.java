@@ -1,4 +1,4 @@
-package util;
+package blatt05;
 
 /**
  * An Entry holds an Object <code>o</code> and a reference <code>next</code> to
