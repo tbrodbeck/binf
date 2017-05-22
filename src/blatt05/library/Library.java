@@ -1,6 +1,6 @@
-package blatt05;
+package blatt05.library;
 
-import util.List;
+import blatt05.List;
 
 /**
  * Betrachten Sie das unten stehende UML-Klassendiagramm einer einfachen Bibliotheksverwaltung.

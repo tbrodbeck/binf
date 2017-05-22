@@ -1,4 +1,4 @@
-package blatt05;
+package blatt05.library;
 
 /**
  * @author Ronja von Kittlitz, Tillmann Brodbeck

@@ -1,4 +1,4 @@
-package util;
+package blatt05;
 
 /**
  * A simple linked list. One may go through this list by {@link #advance()} until

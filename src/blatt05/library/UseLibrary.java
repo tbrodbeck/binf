@@ -1,6 +1,6 @@
-package blatt05;
+package blatt05.library;
 
-import util.List;
+import blatt05.List;
 
 /**
  * Simple usage of the Library implementation
