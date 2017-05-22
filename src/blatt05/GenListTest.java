@@ -21,6 +21,7 @@ public class GenListTest {
         GenList<Object> go = new GenList<>();
         go.add(new Object());
         go.delete();
+        go.reset();
 
         GenList<String> gs = new GenList<>();
         gs.add("hiho" );
@@ -53,6 +54,12 @@ public class GenListTest {
             System.out.println("Fehler8");
         if (!gs.clone().equals(gs))
             System.out.println("Fehler9");
+
+        // Seiteneffekte testen
+        GenList<String> gsc = gs.clone();
+        gs.add( "neu" );
+        if (gs.clone().equals(gsc))
+            System.out.println("Fehler: keine seiteneffektfreie Deep-Copy");
 
         System.out.println("Test von GenList abgeschlossen");
 

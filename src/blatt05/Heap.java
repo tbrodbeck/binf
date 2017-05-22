@@ -8,6 +8,7 @@ import java.util.Comparator;
  * Schlüssel. Der Schlüssel eines Knotens ist kleiner oder gleich der Schlüssel seiner Kind-Knoten.
  *
  * Implementieren Sie einen typsicheren Heap.
+ *
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 16.05.17
  */
@@ -18,12 +19,12 @@ public class Heap<T>{
 
     public Heap(Comparator<T> comparator) {
         this.comparator = comparator;
-        h = new T[0];
+        //h = new T[0];
     }
 
-    public Heap() {
-        h = new T[0];
-    }
+//    public Heap() {
+//        h = new T[0];
+//    }
 
     public void insert(T e) {
     }
@@ -32,9 +33,9 @@ public class Heap<T>{
         return (h.length == 0);
     }
 
-    public T returnFirst(){
-
-    }
+//    public T returnFirst(){
+//
+//    }
 
     public T deleteFirst() {
         return null;
