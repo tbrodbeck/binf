@@ -136,6 +136,8 @@ public class GenList<T> implements Cloneable {
     public boolean equals(Object obj) {
         if (obj instanceof GenList)
             // check every element
+            this.reset();
+            ((GenList) obj).reset();
             while(!this.endpos()){
                 if (!this.elem().equals( ((GenList) obj).elem() ))
                     return false;
