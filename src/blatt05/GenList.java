@@ -127,6 +127,11 @@ public class GenList<T> implements Cloneable {
         return null;
     }
 
+    /**
+     * equals for testing of clone
+     * @param obj
+     * @return boolean
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof GenList)
