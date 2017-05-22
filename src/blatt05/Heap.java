@@ -1,4 +1,6 @@
 package blatt05;
+import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Ein Heap ist ein binärer Baum, der bis zur vorletzten Ebene voll besetzt ist. Auf der Blatt-Ebene ist er von
@@ -10,11 +12,28 @@ package blatt05;
  * @version 16.05.17
  */
 public class Heap<T>{
+
+    private T[] h;
+    private Comparator<T> comparator;
+
+    public Heap(Comparator<T> comparator) {
+        this.comparator = comparator;
+        h = new T[0];
+    }
+
+    public Heap() {
+        h = new T[0];
+    }
+
     public void insert(T e) {
     }
 
     public boolean empty() {
-        return false;
+        return (h.length == 0);
+    }
+
+    public T returnFirst(){
+
     }
 
     public T deleteFirst() {
