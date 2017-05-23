@@ -58,7 +58,7 @@ public class List {
    /**
     * Advances one step in this List.
     * 
-    * @throws RuntimeExcpetion
+    * @throws RuntimeException
     *            if the last Entry of this List already has been reached.
     */
    public void advance() {

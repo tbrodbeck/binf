@@ -12,7 +12,7 @@ import java.util.Comparator;
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 16.05.17
  */
-public class Heap<T>{
+public class Heap<T extends Comparable>{
 
     private T[] h;
     private Comparator<T> comparator;

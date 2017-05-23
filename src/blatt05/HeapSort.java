@@ -14,7 +14,7 @@ public class HeapSort {
     *           Elements which should be sorted.
     * @return a sorted copy of <code>elements</code>
     */
-   public static <E> E[] heapSort(Heap<E> h, E[] elements) {
+   public static <E extends Comparable> E[] heapSort(Heap<E> h, E[] elements) {
 
       E[] copy = Arrays.copyOf(elements, elements.length);
 
