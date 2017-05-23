@@ -28,7 +28,7 @@ public class Heap<T>{
      * @param e Element
      */
     public void insert(T e) {
-        if(comparator == null && !(e instanceof Comparable)) throw new ClassCastException;
+        if(comparator == null && !(e instanceof Comparable)) throw new ClassCastException();
         Object[] h2;
         if (h == null) {
             h2 = new Object[1];
@@ -50,7 +50,8 @@ public class Heap<T>{
      * @return kleinstes Element
      */
     public T returnSmallest() {
-        if(empty()) throw new NullPointerException;
+        if(empty()) throw new NullPointerException();
+        if (!(h[0] instanceof T)) throw new ClassCastException();
         return ((T)h[0]);
     }
 
@@ -59,7 +60,8 @@ public class Heap<T>{
      * @return gelöschtes Element
      */
     public T deleteFirst() {
-        if(empty()) throw new NullPointerException;
+        if(empty()) throw new NullPointerException();
+        if (!(h[0] instanceof T)) throw new ClassCastException();
         T r = ((T)h[0]);
         if(h.length == 1) h = null;
         else {
@@ -82,12 +84,14 @@ public class Heap<T>{
         if (!empty()) {
             int i = 0;
             int j = 1;
+            if(!((h[0] instanceof T) && (h[j] instanceof T) && (h[j + 1] instanceof T))) throw new ClassCastException();
             T x = ((T)h[0]);
             if ((j < h.length - 1) && (comparen(((T)h[j]), ((T)h[j + 1])) > 0)) j++;
             while ((j <= h.length - 1) && (comparen((T)x, ((T)h[j])) > 0)) {
                 h[i] = h[j];
                 i = j;
                 j = 2 * i + 1;
+                if(!((h[j] instanceof T) && (h[j + 1] instanceof T))) throw new ClassCastException();
                 if ((j < h.length - 1) && (comparen(((T)h[j]), ((T)h[j + 1])) > 0)) j++;
             }
             h[i] = x;
@@ -102,7 +106,7 @@ public class Heap<T>{
      */
     private int comparen(T e1, T e2) {
         if(comparator == null) {
-            if(!((e1 instanceof Comparable) && (e2 instanceof Comparable))) throw new ClassCastException;
+            if(!((e1 instanceof Comparable) && (e2 instanceof Comparable))) throw new ClassCastException();
             return ((Comparable) e1).compareTo((Comparable) e2);
         }
         return comparator.compare(e1, e2);

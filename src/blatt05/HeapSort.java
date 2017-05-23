@@ -48,11 +48,16 @@ public class HeapSort {
       if(!(heap.toString()).equals("a c b ")) System.out.println("Fehler beim einfügen(Comparable)");
       if(!(heap2.toString()).equals("a c b ")) System.out.println("Fehler beim einfügen(Comparator)");
       if(!(heap.returnSmallest() == s1)) System.out.println("Fehler beim ersten Wurzel ausgeben(Comparable)");
-      if(!(heap.returnSmallest() == s1)) System.out.println("Fehler beim ersten Wurzel ausgeben(Comparator)");
+      if(!(heap2.returnSmallest() == s1)) System.out.println("Fehler beim ersten Wurzel ausgeben(Comparator)");
       heap.deleteFirst();
-      heap.deleteFirst();
+      heap2.deleteFirst();
       if(!(heap.toString()).equals("b c ")) System.out.println("Fehler beim löschen(Comparable)");
-      if(!(heap.toString()).equals("b c ")) System.out.println("Fehler beim löschen(Comparator)");
+      if(!(heap2.toString()).equals("b c ")) System.out.println("Fehler beim löschen(Comparator)");
+      int i = 3;
+      //heap.insert(i);
+      Heap<Heap> heapheap = new Heap<Heap>();
+      heapheap.insert(heap);
+      heapheap.insert(heap2);
    }
 
 }
