@@ -1,4 +1,4 @@
-package blatt03;
+//package blatt03;
 
 import java.util.Arrays;
 
@@ -9,7 +9,7 @@ import java.util.Arrays;
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 03.05.17
  */
-public class Point extends Geometry implements Comparable {
+/*public class Point extends Geometry implements Comparable {
 
     private double[] coords;
 
@@ -36,7 +36,7 @@ public class Point extends Geometry implements Comparable {
      * @param other
      * @return
      */
-    public Geometry encapsulate(Geometry other) {
+    /*public Geometry encapsulate(Geometry other) {
         if (dimensions() != other.dimensions()) return null;
         if (other instanceof Point){
             if (((Point)other).getCoords() == getCoords())
@@ -89,7 +89,7 @@ public class Point extends Geometry implements Comparable {
      *                              from being compared to this object.
      */
     @Override
-    public int compareTo(Object o) {
+   /* public int compareTo(Object o) {
         if (o instanceof Geometry) {
             if (this.volume() > ((Geometry) o).volume())
                 return 1;
@@ -108,5 +108,4 @@ public class Point extends Geometry implements Comparable {
                 "} " + super.toString();
     }
 }
-
-//wäre es nicht fast klüger das der n-dimensionale Punkt den 2-dim. extended?  Siehe Circle Ellipse im Skript
+*/

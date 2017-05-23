@@ -13,7 +13,7 @@ import static java.util.Arrays.copyOf;
  */
 public class Heap<T>{
 
-    private T[] h;
+    private Object[] h;
     private Comparator<T> comparator;
 
     public Heap(Comparator<T> comparator) {
@@ -29,14 +29,13 @@ public class Heap<T>{
      */
     public void insert(T e) {
         if(comparator == null && !(e instanceof Comparable)) throw new RuntimeException("nicht comparable");
-        T[] h2;
+        Object[] h2;
         if (h == null) {
-            h2 = new T[1];
+            h2 = new Object[1];
             h2[0] = e;
         }
         else {
             h2 = kopieplus(h, e);
-            h2[h.length] = e;
             sift(h2);
         }
         h = h2;
@@ -52,7 +51,7 @@ public class Heap<T>{
      */
     public T returnSmallest() {
         if(empty()) throw new RuntimeException("nichts da");
-        return h[0];
+        return ((T)h[0]);
     }
 
     /**
@@ -61,32 +60,35 @@ public class Heap<T>{
      */
     public T deleteFirst() {
         if(empty()) throw new RuntimeException("nichts da");
-        T r = h[0];
+        T r = ((T)h[0]);
         if(h.length == 1) h = null;
         else {
             h[0] = h[h.length - 1];
-            T[] h2 = copyOf(h, h.length - 1);
+            Object[] h2 = copyOf(h, h.length - 1);
             sift(h2);
             h = h2;
         }
         return r;
     }
 
+
+
     /**
      * lässt das erste Element eines Arrays/Heaps runtersickern
      * @param h Array/Heap
      */
-    private void sift(T[] h) {
+
+    private void sift(Object[] h) {
         if (!empty()) {
             int i = 0;
             int j = 1;
-            T x = h[0];
-            if ((j < h.length - 1) && (comparen(h[j], h[j + 1]) > 0)) j++;
-            while ((j <= h.length - 1) && (comparen(x, h[j]) > 0)) {
+            T x = ((T)h[0]);
+            if ((j < h.length - 1) && (comparen(((T)h[j]), ((T)h[j + 1])) > 0)) j++;
+            while ((j <= h.length - 1) && (comparen((T)x, ((T)h[j])) > 0)) {
                 h[i] = h[j];
                 i = j;
                 j = 2 * i + 1;
-                if ((j < h.length - 1) && (comparen(h[j], h[j + 1]) > 0)) j++;
+                if ((j < h.length - 1) && (comparen(((T)h[j]), ((T)h[j + 1])) > 0)) j++;
             }
             h[i] = x;
         }
@@ -113,12 +115,19 @@ public class Heap<T>{
      * @param e Element
      * @return neuer Array
      */
-    private T[] kopieplus(T[] h, T e) {
-        T[] h2 = new T[h.length + 1];
+    private Object[] kopieplus(Object[] h, T e) {
+        Object[] h2 = new Object[h.length + 1];
         h2[0] = e;
         for (int i = 1; i < h2.length; i++) {
             h2[i] = h[i-1];
         }
+        return h2;
+    }
+
+    public String toString(){
+        String s = "";
+        for(int i = 0; i < h.length; i++) s = s + h[i] + " ";
+        return s;
     }
 
 }

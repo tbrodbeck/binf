@@ -1,4 +1,4 @@
-package blatt03;
+//package blatt03;
 
 /**
  * Ein Volume kann durch zwei n-dimensionale Punkte erzeugt werden, die ein rechtwinkliges Volumen aufspannen, dessen Kanten
@@ -7,7 +7,7 @@ package blatt03;
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 03.05.17
  */
-public class Volume extends Geometry implements Comparable {
+/*public class Volume extends Geometry implements Comparable {
 
     private Point one;
     private Point two;
@@ -112,7 +112,7 @@ public class Volume extends Geometry implements Comparable {
      *                              from being compared to this object.
      */
     @Override
-    public int compareTo(Object o) {
+    /*public int compareTo(Object o) {
         if (o instanceof Geometry) {
             if (this.volume() > ((Geometry) o).volume())
                 return 1;
@@ -132,4 +132,4 @@ public class Volume extends Geometry implements Comparable {
                 "} " + super.toString();
     }
 
-}
+}*/
