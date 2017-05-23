@@ -28,7 +28,7 @@ public class Heap<T>{
      * @param e Element
      */
     public void insert(T e) {
-        if(comparator == null && !(e instanceof Comparable)) throw new RuntimeException("nicht comparable");
+        if(comparator == null && !(e instanceof Comparable)) throw new ClassCastException;
         Object[] h2;
         if (h == null) {
             h2 = new Object[1];
@@ -50,7 +50,7 @@ public class Heap<T>{
      * @return kleinstes Element
      */
     public T returnSmallest() {
-        if(empty()) throw new RuntimeException("nichts da");
+        if(empty()) throw new NullPointerException;
         return ((T)h[0]);
     }
 
@@ -59,7 +59,7 @@ public class Heap<T>{
      * @return gelöschtes Element
      */
     public T deleteFirst() {
-        if(empty()) throw new RuntimeException("nichts da");
+        if(empty()) throw new NullPointerException;
         T r = ((T)h[0]);
         if(h.length == 1) h = null;
         else {
@@ -102,7 +102,7 @@ public class Heap<T>{
      */
     private int comparen(T e1, T e2) {
         if(comparator == null) {
-            if(!((e1 instanceof Comparable) && (e2 instanceof Comparable))) throw new RuntimeException("nicht Comparable");
+            if(!((e1 instanceof Comparable) && (e2 instanceof Comparable))) throw new ClassCastException;
             return ((Comparable) e1).compareTo((Comparable) e2);
         }
         return comparator.compare(e1, e2);
