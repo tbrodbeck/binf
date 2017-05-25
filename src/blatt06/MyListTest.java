@@ -1,7 +1,5 @@
 package blatt06;
 
-import test.Assert;
-
 public class MyListTest {
 
    public static void main(String[] args) {
