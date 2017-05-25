@@ -11,7 +11,7 @@ public class UncertainException {
         int result = 0;
 
         try {
-            System.out.println("uncertain" + number + "()");
+            System.out.println("uncertain" + number + "()");  // wird aufgerufen mit number von 1 bis 10
             switch (number) {
                 case 1:
                     result = uncertain.uncertain1();
@@ -44,9 +44,9 @@ public class UncertainException {
                     result = uncertain.uncertain10();
                     break;
             }
-            System.out.println("result = " + result + ", i = " + uncertain.i);
+            System.out.println("result = " + result + ", i = " + uncertain.i);  // wird jeweils aufgerufen, solange keine Exception geworfen wurde
         } catch (Exception e) {
-            System.out.println("i = " + uncertain.i + " Exception (" + e.getClass()
+            System.out.println("i = " + uncertain.i + " Exception (" + e.getClass() // wird jeweils sonst aufgerufen
                     .getName() + ")");
         } finally {
         }
@@ -61,12 +61,12 @@ public class UncertainException {
     public int uncertain1() {
         try {
             throw new RuntimeException();
-        } catch (RuntimeException e) {
+        } catch (RuntimeException e) {  // RuntimeException wird abgefangen
             i++;
             throw new ClassCastException();
         } finally {
-            i++;
-            throw new NumberFormatException();
+            i++;  // i = 2
+            throw new NumberFormatException();  // diese Exception überschreibt das Werfen der ClassCastException
         }
     }
 
@@ -76,8 +76,8 @@ public class UncertainException {
                 break;
             } catch (RuntimeException e) {
                 i++;
-            } finally {
-                i++;
+            } finally {  // before the loop breaks this block is executed
+                i++;  // i = 1
                 throw new RuntimeException();
             }
         }
@@ -97,16 +97,16 @@ public class UncertainException {
                 i++;
             }
         } while (false);
-        return i++;
+        return i++;  // RuntimeException wird abgefangen, returns 2, i = 3
     }
 
     public int uncertain4() {
         try {
-            return i++;
+            return i++;  // returns 0
         } catch (RuntimeException e) {
             i++;
         } finally {
-            i++;
+            i++;  // i = 2
         }
         return i++;
     }
@@ -115,7 +115,7 @@ public class UncertainException {
         try {
             return i;
         } finally {
-            throw new RuntimeException();
+            throw new RuntimeException();  // throws RuntimeException, i = 0
         }
     }
 
@@ -123,7 +123,7 @@ public class UncertainException {
         try {
             throw new RuntimeException();
         } finally {
-            return ++i;
+            return ++i;  // RuntimeExeption wird überschrieben, returns 0, i = 1
         }
     }
 
@@ -133,7 +133,7 @@ public class UncertainException {
         } catch (RuntimeException e) {
             i++;
         } finally {
-            return i++;
+            return i++;  // IOException wird überschrieben, returns 0, i = 1
         }
     }
 
@@ -142,9 +142,9 @@ public class UncertainException {
             throw new NumberFormatException();
         } catch (RuntimeException e) {
             i++;
-            throw new RuntimeException();
+            throw new RuntimeException();  // throws RuntimeException
         } finally {
-            i++;
+            i++;  // i = 2
         }
     }
 
@@ -154,14 +154,14 @@ public class UncertainException {
         } catch (RuntimeException e) {
             return i++;
         } finally {
-            return i++;
+            return i++;  // returns 1, i = 2
         }
     }
 
-    public int uncertain10() throws IOException { // weil IOException eine checked Exception ist, muss sie irgendwo (hier beim Methodenaufruf) abgefangen werden
+    public int uncertain10() throws IOException {  // weil IOException eine checked Exception ist, muss sie irgendwo (hier beim Methodenaufruf) abgefangen werden
         try {
-            throw new java.io.IOException();
-        } catch (RuntimeException e) {
+            throw new java.io.IOException();  // i = 0
+        } catch (RuntimeException e) {  // IOExeption ist keine RuntimeExeption
         }
         return 1;
 
