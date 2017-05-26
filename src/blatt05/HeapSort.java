@@ -1,6 +1,7 @@
 package blatt05;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class HeapSort {
 
@@ -56,8 +57,10 @@ public class HeapSort {
       int i = 3;
       //heap.insert(i);
       Heap<Heap> heapheap = new Heap<Heap>();
-      heapheap.insert(heap);
-      heapheap.insert(heap2);
+      //heapheap.insert(heap);
+      //heapheap.insert(heap2);
+       System.out.println("fertig" +
+               "");
    }
 
 }
