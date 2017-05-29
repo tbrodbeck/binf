@@ -40,42 +40,92 @@ public class CompareCollections {
         for (Object o: arr) {
             o = new Object();
         }
+        int[] arr2 = new int[100000];
 
-        // Test von add
-        System.out.println("-add-");
+        int count = 0;
+        for (int i: arr2) {
+            i = count++;
+        }
+
+        // Test
+        System.out.println("-add(new Object())-");
         for (Collection c: l ) {
+            for (int i = 0; i < 1000; i++)
+                c.add( arr[i] );
             System.out.println(c.getClass() );
             long start = System.nanoTime();
             //wird 100000x ausgeführt und Mittelwert errechnet
-            for (int i = 0; i < 100000; i++)
+            for (int i = 1000; i < 100000; i++)
                 c.add( arr[i] );
-            System.out.println( (System.nanoTime() - start) / 100000.0 );
-
+            System.out.println( (System.nanoTime() - start) / (100000.0 - 1000.0));
         }
         System.out.println();
 
 
-        // Test von contains
-        System.out.println("-contains-");
+        System.out.println("-contains(new Object())-");
         for (Collection c: l ) {
+            for (int i = 0; i < 1000; i++)
+                c.contains( arr[i] );
             System.out.println(c.getClass());
             long start = System.nanoTime();
             //wird 100000x ausgeführt und Mittelwert errechnet
-            for (int i = 99999; i >= 0; i--)
+            for (int i = 99999; i >= 1000; i--)
                 c.contains(arr[i]);
-            System.out.println((System.nanoTime() - start)/100000.0 );
+            System.out.println((System.nanoTime() - start)/(100000.0 -1000.0)  );
+        }
+        System.out.println();
+
+
+        System.out.println("-remove(new Object())-");
+        for (Collection c: l ) {
+            for (int i = 0; i < 1000; i++)
+                c.remove( arr[i] );
+            System.out.println(c.getClass() );
+            long start = System.nanoTime();
+            //wird 100000x ausgeführt und Mittelwert errechnet
+            for (int i = 99999; i >= 1000; i--)
+                c.remove( arr[i] );
+            System.out.println( (System.nanoTime() - start) / (100000.0 - 1000.0) );
+        }
+        System.out.println();
+
+        System.out.println("-add(int i++)-");
+        for (Collection c: l ) {
+            for (int i = 0; i < 1000; i++)
+                c.add( arr2[i] );
+            System.out.println(c.getClass() );
+            long start2 = System.nanoTime();
+            //wird 100000x ausgeführt und Mittelwert errechnet
+            for (int i = 1000; i < 100000; i++)
+                c.add( arr2[i] );
+            System.out.println( (System.nanoTime() - start2) / (100000.0 - 1000.0));
+        }
+        System.out.println();
+
+        System.out.println("-contains(int i++)-");
+        for (Collection c: l ) {
+            for (int i = 0; i < 1000; i++)
+                c.contains( arr2[i] );
+            System.out.println(c.getClass());
+            long start2 = System.nanoTime();
+            //wird 100000x ausgeführt und Mittelwert errechnet
+            for (int i = 99999; i >= 1000; i--)
+                c.contains(arr2[i]);
+            System.out.println((System.nanoTime() - start2)/(100000.0 -1000.0)  );
         }
         System.out.println();
 
         // Test von remove
-        System.out.println("-remove-");
+        System.out.println("-remove(int i++)-");
         for (Collection c: l ) {
+            for (int i = 0; i < 1000; i++)
+                c.remove( arr2[i] );
             System.out.println(c.getClass() );
             long start = System.nanoTime();
             //wird 100000x ausgeführt und Mittelwert errechnet
-            for (int i = 99999; i >= 0; i--)
-                c.remove( arr[i] );
-            System.out.println( (System.nanoTime() - start) / 100000.0 );
+            for (int i = 99999; i >= 1000; i--)
+                c.remove( arr2[i] );
+            System.out.println( (System.nanoTime() - start) / (100000.0 - 1000.0) );
         }
     }
 }
