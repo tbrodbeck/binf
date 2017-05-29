@@ -33,10 +33,10 @@ public class CompareCollections {
         l.add( new ArrayList(  ));
         l.add( new HashSet(  ) );
 
-        System.out.println("Test der Laufzeiteigenschaften:\n");
+        System.out.println("Durchschnittslaufzeit von Methoden:\n");
 
-        // dafür erstellen wir 10 000 Objekte in einem Array
-        Object[] arr = new Object[10000];
+        // dafür erstellen wir 100000 Objekte in einem Array
+        Object[] arr = new Object[100000];
         for (Object o: arr) {
             o = new Object();
         }
@@ -46,11 +46,24 @@ public class CompareCollections {
         for (Collection c: l ) {
             System.out.println(c.getClass() );
             long start = System.nanoTime();
-            //wird 10 000x ausgeführt und Mittelwert errechnet
-            for (int i = 0; i < 10000; i++)
+            //wird 100000x ausgeführt und Mittelwert errechnet
+            for (int i = 0; i < 100000; i++)
                 c.add( arr[i] );
-            System.out.println( (System.nanoTime() - start) / 10000.0 );
+            System.out.println( (System.nanoTime() - start) / 100000.0 );
 
+        }
+        System.out.println();
+
+
+        // Test von contains
+        System.out.println("-contains-");
+        for (Collection c: l ) {
+            System.out.println(c.getClass());
+            long start = System.nanoTime();
+            //wird 100000x ausgeführt und Mittelwert errechnet
+            for (int i = 99999; i >= 0; i--)
+                c.contains(arr[i]);
+            System.out.println((System.nanoTime() - start)/100000.0 );
         }
         System.out.println();
 
@@ -59,22 +72,10 @@ public class CompareCollections {
         for (Collection c: l ) {
             System.out.println(c.getClass() );
             long start = System.nanoTime();
-            //wird 10 000x ausgeführt und Mittelwert errechnet
-            for (int i = 0; i < 10000; i++)
+            //wird 100000x ausgeführt und Mittelwert errechnet
+            for (int i = 99999; i >= 0; i--)
                 c.remove( arr[i] );
-            System.out.println( (System.nanoTime() - start) / 10000.0 );
-        }
-        System.out.println();
-
-        // Test von contains
-        System.out.println("-contains-");
-        for (Collection c: l ) {
-            System.out.println(c.getClass());
-            long start = System.nanoTime();
-            //wird 10 000x ausgeführt und Mittelwert errechnet
-            for (int i = 0; i < 10000; i++)
-                c.contains(arr[i]);
-            System.out.println((System.nanoTime() - start)/10000.0 );
+            System.out.println( (System.nanoTime() - start) / 100000.0 );
         }
     }
 }
