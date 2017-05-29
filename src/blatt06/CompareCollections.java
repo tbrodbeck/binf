@@ -1,5 +1,6 @@
 package blatt06;
 
+import java.security.InvalidParameterException;
 import java.util.*;
 
 /**
@@ -40,15 +41,27 @@ public class CompareCollections {
         for (Object o: arr) {
             o = new Object();
         }
-        int[] arr2 = new int[100000];
+        Integer[] arr2 = new Integer[100000];
 
         int count = 0;
-        for (int i: arr2) {
+        for (Integer i: arr2) {
             i = count++;
         }
 
         // Test
-        System.out.println("-add(new Object())-");
+        compareAdd( l, arr );
+        compareContains( l, arr );
+        compareRemove( l, arr );
+        compareAdd( l, arr2 );
+        compareContains( l, arr2 );
+        compareRemove( l, arr2 );
+    }
+
+    // adds a Objectarray to a List of Collections
+    private static void compareAdd(List<Collection> l, Object[] arr) {
+        if (arr.length == 0)
+            throw new InvalidParameterException(  );
+        System.out.println("add " + arr.getClass());
         for (Collection c: l ) {
             for (int i = 0; i < 1000; i++)
                 c.add( arr[i] );
@@ -60,9 +73,11 @@ public class CompareCollections {
             System.out.println( (System.nanoTime() - start) / (100000.0 - 1000.0));
         }
         System.out.println();
+    }
 
-
-        System.out.println("-contains(new Object())-");
+    // calls contain of Objects a List of Collections
+    private static void compareContains(List<Collection> l, Object[] arr) {
+        System.out.println("contains " + arr.getClass());
         for (Collection c: l ) {
             for (int i = 0; i < 1000; i++)
                 c.contains( arr[i] );
@@ -74,9 +89,11 @@ public class CompareCollections {
             System.out.println((System.nanoTime() - start)/(100000.0 -1000.0)  );
         }
         System.out.println();
+    }
 
-
-        System.out.println("-remove(new Object())-");
+    // removes contains of an Object on a list of collections
+    private static void compareRemove(List<Collection> l, Object[] arr) {
+        System.out.println("remove " + arr.getClass());
         for (Collection c: l ) {
             for (int i = 0; i < 1000; i++)
                 c.remove( arr[i] );
@@ -88,44 +105,5 @@ public class CompareCollections {
             System.out.println( (System.nanoTime() - start) / (100000.0 - 1000.0) );
         }
         System.out.println();
-
-        System.out.println("-add(int i++)-");
-        for (Collection c: l ) {
-            for (int i = 0; i < 1000; i++)
-                c.add( arr2[i] );
-            System.out.println(c.getClass() );
-            long start2 = System.nanoTime();
-            //wird 100000x ausgeführt und Mittelwert errechnet
-            for (int i = 1000; i < 100000; i++)
-                c.add( arr2[i] );
-            System.out.println( (System.nanoTime() - start2) / (100000.0 - 1000.0));
-        }
-        System.out.println();
-
-        System.out.println("-contains(int i++)-");
-        for (Collection c: l ) {
-            for (int i = 0; i < 1000; i++)
-                c.contains( arr2[i] );
-            System.out.println(c.getClass());
-            long start2 = System.nanoTime();
-            //wird 100000x ausgeführt und Mittelwert errechnet
-            for (int i = 99999; i >= 1000; i--)
-                c.contains(arr2[i]);
-            System.out.println((System.nanoTime() - start2)/(100000.0 -1000.0)  );
-        }
-        System.out.println();
-
-        // Test von remove
-        System.out.println("-remove(int i++)-");
-        for (Collection c: l ) {
-            for (int i = 0; i < 1000; i++)
-                c.remove( arr2[i] );
-            System.out.println(c.getClass() );
-            long start = System.nanoTime();
-            //wird 100000x ausgeführt und Mittelwert errechnet
-            for (int i = 99999; i >= 1000; i--)
-                c.remove( arr2[i] );
-            System.out.println( (System.nanoTime() - start) / (100000.0 - 1000.0) );
-        }
     }
 }
