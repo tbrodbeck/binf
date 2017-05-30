@@ -195,7 +195,7 @@ public class MyList<E> implements Cloneable, Iterable<E> {
         * @return ob Iterator am Ende angekommen ist
         */
        public boolean hasNext() {
-          return !(position == null);
+          return !(position.next == null);
        }
 
        /**
@@ -220,7 +220,6 @@ public class MyList<E> implements Cloneable, Iterable<E> {
           vorheriger.next = position.next; //aus Originalliste löschen
           position = vorheriger;
           vorheriger = null;
-          anfangszustand++;
        }
     }
     /**
