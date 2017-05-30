@@ -1,5 +1,7 @@
 package blatt06;
 
+import java.util.HashMap;
+
 /**
  * Every instance of Fraction represents a fraction with numerator and
  * decorator.
@@ -15,6 +17,7 @@ public class Fraction extends Number{
     */
    public static final String REGEX = "-?\\d+/\\d*[1-9]\\d*";
    private static Fraction fraction;
+   private static HashMap<String, Fraction> hashMap = new HashMap<String, Fraction>();
 
    /**
     * Creates greatest common divisor for a and b.
@@ -43,7 +46,7 @@ public class Fraction extends Number{
          throw new RuntimeException("Parsing error");
       }
       String[] splitted = s.split("/");
-      return new Fraction(Integer.parseInt(splitted[0]),
+      return getFraction(Integer.parseInt(splitted[0]),
             Integer.parseInt(splitted[1]));
    }
 
@@ -51,13 +54,28 @@ public class Fraction extends Number{
 
    private int denominator;
 
+   public static Fraction getFraction(int numerator, int denominator) {
+       throw new RuntimeException("denominator == 0 is not possible");
+       Fraction f = new Fraction(numerator, denominator);
+       String key = f.toString();
+       Fraction value = hashMap.get(key);
+       if(value == null) {
+           hashMap.put(key, f);
+           return f;
+       }
+       return value;
+   }
+
+   public static Fraction getFraction(int numerator) {
+       return getFraction(numerator, 1);
+   }
    /**
     * Creates a Fraction object with numerator and denominator 1, cancels the
     * fraction with creation.
     * 
     * @param numerator
     */
-   public Fraction(int numerator) {
+   private Fraction(int numerator) {
       this(numerator, 1);
    }
 
@@ -68,7 +86,7 @@ public class Fraction extends Number{
     * @param numerator
     * @param denominator
     */
-   public Fraction(int numerator, int denominator) {
+   private Fraction(int numerator, int denominator) {
       if (denominator == 0) {
          throw new RuntimeException("denominator == 0 is not possible");
       }
@@ -89,6 +107,7 @@ public class Fraction extends Number{
       this.denominator = denominator / gcd;
    }
 
+
    /**
     * Adds addend to this Fraction and return the result as a new Fraction.
     * 
@@ -97,7 +116,7 @@ public class Fraction extends Number{
     * @return the sum as a new Fraction
     */
    public Fraction add(Fraction addend) {
-      return new Fraction(this.numerator * addend.denominator
+      return getFraction(this.numerator * addend.denominator
             + this.denominator * addend.numerator, this.denominator
             * addend.denominator);
    }
@@ -110,7 +129,7 @@ public class Fraction extends Number{
     * @return quotient as a new Fraction
     */
    public Fraction divide(Fraction another) {
-      return new Fraction(this.numerator * another.denominator,
+      return getFraction(this.numerator * another.denominator,
             this.denominator * another.numerator);
    }
 
@@ -138,7 +157,7 @@ public class Fraction extends Number{
     * @return product as a new Fraction
     */
    public Fraction multiply(Fraction another) {
-      return new Fraction(this.numerator * another.numerator, this.denominator
+      return getFraction(this.numerator * another.numerator, this.denominator
             * another.denominator);
    }
 
@@ -150,7 +169,7 @@ public class Fraction extends Number{
     * @return product as a new Fraction
     */
    public Fraction multiply(int n) {
-      return new Fraction(this.numerator * n, this.denominator);
+      return getFraction(this.numerator * n, this.denominator);
    }
 
    /**
@@ -178,7 +197,7 @@ public class Fraction extends Number{
     * @return the difference as a new Fraction
     */
    public Fraction subtract(Fraction subtrahend) {
-      return new Fraction(this.numerator * subtrahend.denominator
+      return getFraction(this.numerator * subtrahend.denominator
             - this.denominator * subtrahend.numerator, this.denominator
             * subtrahend.denominator);
    }
