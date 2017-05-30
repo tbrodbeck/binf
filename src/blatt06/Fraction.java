@@ -6,7 +6,7 @@ import java.util.HashMap;
  * Every instance of Fraction represents a fraction with numerator and
  * decorator.
  * 
- * @author Mathias Menninghaus (mathias.menninghaus@uos.de)
+ * @author Ronja von Kittlitz, Tillmann Brodbeck
  * 
  */
 public class Fraction extends Number{

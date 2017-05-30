@@ -12,7 +12,7 @@ import java.util.function.Consumer;
  * {@link #delete()} and {@link #add(Object)} elements. After advancing it is
  * possible to go back to the beginning by {@link #reset()}.
  * 
- * @author Mathias Menninghaus (mathias.menninghaus@uos.de)
+ * @author Ronja von Kittlitz, Tillmann Brodbeck
  * 
  */
 public class MyList<E> implements Cloneable, Iterable<E> {
@@ -174,6 +174,11 @@ public class MyList<E> implements Cloneable, Iterable<E> {
         return new Iterator(zustand);
     }
 
+    /**
+     Erweitern Sie die Klasse MyList aus der Lösung des letzten Aufgabenblattes um das Interface java.lang.Iterable und
+     einen entsprechenden fail-fast Iterator, der nach der Vorgabe des Interfaces java.util.Iterator dazu in der Lage ist,
+     die Liste zu durchlaufen und dabei Elemente zu löschen.
+     */
     private class Iterator<E> implements java.util.Iterator<E> {
 
        private int anfangszustand;
@@ -186,10 +191,17 @@ public class MyList<E> implements Cloneable, Iterable<E> {
           vorheriger = null;
        }
 
+       /**
+        * @return ob Iterator am Ende angekommen ist
+        */
        public boolean hasNext() {
           return !(position == null);
        }
 
+       /**
+        * bewegt den Iterator eins nach vorne
+        * @return das neue erste Element
+        */
        public E next() {
           if(anfangszustand!=zustand) throw new java.util.ConcurrentModificationException("die Orignalliste wurde bearbeitet");
           if (!hasNext()) throw new NoSuchElementException("es gibt keine weiteren Elemente");
@@ -198,6 +210,10 @@ public class MyList<E> implements Cloneable, Iterable<E> {
           return position.o;
        }
 
+       /**
+        * löscht das aktuelle Element aus der Liste und geht einen Schritt zurück
+        * This method can be called only once per call to next()
+        */
        public void remove() {
           if(anfangszustand!=zustand) throw new java.util.ConcurrentModificationException("die Originalliste wurde bearbeitet");
           if(vorheriger == null) throw new IllegalStateException("pro next darf remove nur einmal aufgerufen werden");
