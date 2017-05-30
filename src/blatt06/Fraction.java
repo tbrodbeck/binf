@@ -55,7 +55,7 @@ public class Fraction extends Number{
    private int denominator;
 
    public static Fraction getFraction(int numerator, int denominator) {
-       throw new RuntimeException("denominator == 0 is not possible");
+       if(denominator == 0) throw new RuntimeException("denominator == 0 is not possible");
        Fraction f = new Fraction(numerator, denominator);
        String key = f.toString();
        Fraction value = hashMap.get(key);

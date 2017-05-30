@@ -1,5 +1,6 @@
 package blatt06;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Spliterator;
@@ -25,11 +26,13 @@ public class MyList<E> implements Cloneable, Iterable<E> {
     */
    private MyEntry<E> pos;
 
+   private int zustand;
    /**
     * Create a new empty List.
     */
    public MyList() {
       pos = begin = new MyEntry<E>();
+      zustand = 0;
    }
 
    /**
@@ -98,8 +101,8 @@ public class MyList<E> implements Cloneable, Iterable<E> {
     */
    public void add(E x) {
       MyEntry<E> newone = new MyEntry<E>(x, pos.next);
-
       pos.next = newone;
+      zustand++;
    }
 
    /**
@@ -114,6 +117,7 @@ public class MyList<E> implements Cloneable, Iterable<E> {
          throw new NoSuchElementException("Already at the end of this List");
       }
       pos.next = pos.next.next;
+      zustand++;
    }
 
    /**
@@ -167,9 +171,42 @@ public class MyList<E> implements Cloneable, Iterable<E> {
      */
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new Iterator(zustand);
     }
 
+    private class Iterator<E> implements java.util.Iterator<E> {
+
+       private int anfangszustand;
+       private MyEntry<E> position;
+       private MyEntry<E> vorheriger;
+
+       public Iterator(int anfangszustand) {
+          this.anfangszustand = anfangszustand;
+          position = (MyEntry<E>) begin;
+          vorheriger = null;
+       }
+
+       public boolean hasNext() {
+          return !(position == null);
+       }
+
+       public E next() {
+          if(anfangszustand!=zustand) throw new java.util.ConcurrentModificationException("die Orignalliste wurde bearbeitet");
+          if (!hasNext()) throw new NoSuchElementException("es gibt keine weiteren Elemente");
+          vorheriger = position;
+          position = position.next;
+          return position.o;
+       }
+
+       public void remove() {
+          if(anfangszustand!=zustand) throw new java.util.ConcurrentModificationException("die Originalliste wurde bearbeitet");
+          if(vorheriger == null) throw new IllegalStateException("pro next darf remove nur einmal aufgerufen werden");
+          vorheriger.next = position.next; //aus Originalliste löschen
+          position = vorheriger;
+          vorheriger = null;
+          anfangszustand++;
+       }
+    }
     /**
      * Performs the given action for each element of the {@code Iterable}
      * until all elements have been processed or the action throws an
