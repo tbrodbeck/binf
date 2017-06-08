@@ -174,20 +174,6 @@ public class MyList<E> implements Cloneable, Iterable<E>, Visitable<E> {
     }
 
     /**
-     * Iterates through every element of this instance and calls for every
-     * element {@link Visitor#visit(Object)}. Stops visiting every element if
-     * there are no more elements to be visited or if
-     * {@link Visitor#visit(Object)} returns <code>false</code>
-     *
-     * @param v the Visitor which should be called for every element in this
-     *          Visitable instance
-     */
-    @Override
-    public void accept(Visitor<E> v) {
-
-    }
-
-    /**
      Erweitern Sie die Klasse MyList aus der Lösung des letzten Aufgabenblattes um das Interface java.lang.Iterable und
      einen entsprechenden fail-fast Iterator, der nach der Vorgabe des Interfaces java.util.Iterator dazu in der Lage ist,
      die Liste zu durchlaufen und dabei Elemente zu löschen.
@@ -277,5 +263,27 @@ public class MyList<E> implements Cloneable, Iterable<E>, Visitable<E> {
     @Override
     public Spliterator<E> spliterator() {
         return null;
+    }
+
+    /**
+     * Iterates through every element of this instance and calls for every
+     * element {@link Visitor#visit(Object)}. Stops visiting every element if
+     * there are no more elements to be visited or if
+     * {@link Visitor#visit(Object)} returns <code>false</code>
+     *
+     * @param v the Visitor which should be called for every element in this
+     *          Visitable instance
+     */
+    @Override
+    public void accept(Visitor<E> v) {
+        this.reset();
+        // Dies wird so lange gemacht, bis entweder alle Elemente durchlaufen
+        // wurden, oder bis der Visitor false zurück liefe
+        boolean cont = true;
+        while (!this.endpos() && cont) {
+            cont = v.visit( this.elem() );
+            this.advance();
+        }
+        this.reset();
     }
 }
