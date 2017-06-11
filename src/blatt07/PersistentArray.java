@@ -75,7 +75,7 @@ public class PersistentArray {
         if(position < 0) throw new IllegalArgumentException("Position muss positiv sein");
         if(eintraegeAnzahl() < position) throw new NoSuchElementException("Array ist nicht so lang");
         try {
-            f.seek(position);
+            f.seek(position*4);
         } catch (IOException e) { //Fall dürfte nicht eintreten (siehe oben)
             throw new RuntimeException("Hier läuft was beim an die richtige Position gehen falsch");
         }
@@ -90,16 +90,16 @@ public class PersistentArray {
 
     /**
      *
-     * @return ob FilePointer nach letztem Element ist
+     * @return ob noch ein Element kommt
      */
     public boolean ende(){
-        long akPos = 0;
+        long akPos;
         try {
-            akPos = f.getFilePointer();
+            akPos = f.getFilePointer()/4;
         } catch (IOException e) { //dürfte nicht auftreten
             throw new RuntimeException("Hier läuft was bei aktueller Position falsch");
         }
-        return(eintraegeAnzahl()-akPos<4);
+        return(eintraegeAnzahl()-akPos<1);
     }
     /**
      * geht eine Stelle weiter
@@ -160,6 +160,13 @@ public class PersistentArray {
         return returnElement();
     }
 
+    public void close() throws IOException {
+        try{
+            f.close();
+        } catch(IOException i){
+            throw new IOException("Schließen nicht möglich");
+        }
+    }
 
     public static void main(String[] args) throws IOException {
         int[] array = {1,2,3};
