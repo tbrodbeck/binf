@@ -1,5 +1,7 @@
 package blatt06;
 
+import blatt07.Visitable;
+
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
