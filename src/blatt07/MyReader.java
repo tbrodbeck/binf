@@ -1,6 +1,7 @@
 package blatt07;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.LineNumberReader;
 import java.io.Reader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
