@@ -29,25 +29,32 @@ public class SearchLines {
 
             try (FileInputStream fis = new FileInputStream( f )) {
 
+                // create Reader with decorator pattern
                 MyReader reader = new MyReader( new InputStreamReader( fis ), args[0] );
 
                 String line;
 
-                int count = reader.getAmountOfMatches();
-            /* Das Programm soll jede Zeile der Datei, die den regulären Ausdruck mindestens
-             * einmal enthält, zusammen mit der Zeilennummer auf der Standardkonsole ausgeben.
-             * Zusätzlich soll für jede ausgegebene Zeile die Anzahl der Vorkommen des regulären
-             * Ausdrucks ausgeben werden. */
+                int count = 0;
+                // new count
+                int n_count;
+
+                /* Das Programm soll jede Zeile der Datei, die den regulären Ausdruck mindestens
+                 * einmal enthält, zusammen mit der Zeilennummer auf der Standardkonsole ausgeben.
+                 * Zusätzlich soll für jede ausgegebene Zeile die Anzahl der Vorkommen des regulären
+                 * Ausdrucks ausgeben werden. */
                 try {
                     while ((line = reader.readLine()) != null) {
-                        // if the count went up
-                        int n_count;
+                        // if the count went up -> new match
                         if ((n_count = reader.getAmountOfMatches()) > count) {
                             System.out.println( "Regex \"" + args[0] + "\" wurde in Zeile " + reader.getLineNumber() + " " + (n_count - count) + "x gefunden:" );
-                            System.out.println( line + "\n");
+                            System.out.println( line );
+                            System.out.println();
                             count = n_count;
                         }
                     }
+
+                    System.out.println("Insgesamt " + count + "x gefunden.");
+
                 // Fehlerausgaben
                 } catch (IOException e) {
                     e.printStackTrace();
