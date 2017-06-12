@@ -7,7 +7,7 @@ public class DateiVisitorTest {
 
     public static void main(String[] args) {
         Dateisystem ds = new Dateisystem("/Users/Ronja/Übung8");
-        DateiVisitor dv = new DateiVisitor();
+        DateisystemVisitor dv = new AllOrNoneDateisystemVisitor(true);
         ds.accept(dv);
     }
 }

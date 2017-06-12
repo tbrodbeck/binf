@@ -5,19 +5,29 @@ import java.io.File;
 /**
  * Created by Ronja on 12.06.17.
  */
-public class Dateisystem{
+public class Dateisystem {
 
     private File wurzeldatei;
+
     public Dateisystem(String verzeichnissname) {
         wurzeldatei = new File(verzeichnissname);
     }
 
-    public void accept(DateiVisitor v) {
-        //File[] files = wurzeldatei.listFiles();
-        //for(int i = 0; i < files.length; i++) {
-          //  if(v.visit(files[i]) = true) {
-            //}
-        v.visit(wurzeldatei);
+    public void accept(DateisystemVisitor v) {
+        System.out.println("+ " + wurzeldatei.getName());
+        durchlaufen(wurzeldatei,v);
+    }
+
+    private void durchlaufen(File f, DateisystemVisitor v){
+        if(!f.isDirectory()) throw new IllegalArgumentException("nur eine Directory kann durchlaufen werden");
+        File[] files = f.listFiles();
+        for (File unterfile : files) {
+            if (unterfile.isFile()) v.visitFile(unterfile);
+            if (unterfile.isDirectory()) {
+                if (v.visitDirectory(unterfile)) durchlaufen(unterfile, v);
+                v.aufraeumen();
+            }
+        }
     }
 
 }
