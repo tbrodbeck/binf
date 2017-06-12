@@ -11,7 +11,7 @@ public class AllOrNoneDateisystemVisitor implements DateisystemVisitor{
 
     public AllOrNoneDateisystemVisitor(boolean rekursiv) {
         this.rekursiv = rekursiv;
-        einrueckung = 1;
+        einrueckung = 0;
     }
 
 

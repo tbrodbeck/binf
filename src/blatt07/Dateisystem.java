@@ -36,8 +36,10 @@ public class Dateisystem {
         for (File unterfile : files) {
             if (unterfile.isFile()) v.visitFile(unterfile);
             if (unterfile.isDirectory()) {
-                if (v.visitDirectory(unterfile)) durchlaufen(unterfile, v);
-                v.aufraeumen();
+                if (v.visitDirectory(unterfile)) {
+                    durchlaufen(unterfile, v);
+                    v.aufraeumen();
+                }
             }
         }
     }
