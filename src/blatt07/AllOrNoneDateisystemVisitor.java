@@ -10,7 +10,7 @@ public class AllOrNoneDateisystemVisitor implements DateisystemVisitor{
     int einrueckung;
 
     public AllOrNoneDateisystemVisitor(boolean rekursiv) {
-        this.r = r;
+        this.rekursiv = rekursiv;
         einrueckung = 1;
     }
 
@@ -46,9 +46,9 @@ public class AllOrNoneDateisystemVisitor implements DateisystemVisitor{
     @Override
     /**
      * setzt die Einrückungen zurück
-     * @return
+     * @return true
      */
-    public boolean aufrauemen() {
+    public boolean aufraeumen() {
         einrueckung--;
         return true;
     }
