@@ -9,7 +9,7 @@ public class List {
     public static void main(String[] args) {
         //wenn nichts
         boolean rekursiv = false;
-        String verzeichnis = " ";
+        String verzeichnis = "./";
         //wenn zuerst r kommt
         if (args.length > 0) {
             if ((args[0]).equals("-r")) rekursiv = true;
@@ -20,9 +20,9 @@ public class List {
             //wenn ein r kommt und es 2 Elemente gibt -> Verzeichniss
             if (args.length == 2) verzeichnis = args[1];
             //Visitable und Visitor inizialisieren
-            Dateisystem ds = new Dateisystem(verzeichnis);
-            DateisystemVisitor dv = new AllOrNoneDateisystemVisitor(rekursiv);
-            ds.accept(dv);
         }
+        Dateisystem ds = new Dateisystem(verzeichnis);
+        DateisystemVisitor dv = new AllOrNoneDateisystemVisitor(rekursiv);
+        ds.accept(dv);
     }
 }
