@@ -1,8 +1,12 @@
 package blatt08;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 
 /**
  * A Heap is a binary tree with h levels, which is fully loaded on the levels
@@ -25,14 +29,14 @@ import java.util.NoSuchElementException;
  * 
  * @param <E>
  */
-public class Heap<E> {
+public class Heap<E> implements Serializable{
 
    private static final int DEFAULT_INITIAL_CAPACITY = 11;
 
    /*
     * The heap as Object[], it is not possible to instantiate a generic array.
     */
-   private Object[] heap;
+   private transient Object[] heap;
 
    private int size = 0;
 
@@ -290,5 +294,32 @@ public class Heap<E> {
       } else {
          return comparator.compare(one, another);
       }
+   }
+   private void writeObject(ObjectOutputStream oout) {
+      try {
+         oout.defaultWriteObject();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+      for(int i=0; i<= size; i++) {
+         try{
+            oout.writeObject(heap[i]);
+         }
+         catch(IOException e){
+            e.printStackTrace();
+         }
+      }
+   }
+
+   private void readObject(ObjectInputStream oin) {
+      try {
+         oin.defaultReadObject();
+      } catch (IOException e) {
+         e.printStackTrace();
+      } catch (ClassNotFoundException e) {
+         throw new RuntimeException("Klasse wurde verändert");
+      }
+      if(this.size <= DEFAULT_INITIAL_CAPACITY) this.heap = new Object[DEFAULT_INITIAL_CAPACITY];
+
    }
 }
