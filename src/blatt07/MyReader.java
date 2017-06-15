@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 06.06.17
  */
-public class MyReader extends LineNumberReader {
+public class MyReader extends LineNumberReader implements AutoCloseable {
 
     // our search pattern
     private final Pattern p;
