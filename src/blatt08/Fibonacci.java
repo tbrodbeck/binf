@@ -21,18 +21,25 @@ public class Fibonacci {
     */
    static {
       File f = new File("fibhash.ser");
+      HashMap<Integer, Long> tempFibhash = null;
       if (f.isFile()) {
          try{
             ObjectInputStream oin = new ObjectInputStream(new FileInputStream("fibhash.ser"));
+            tempFibhash = (HashMap<Integer,Long>)oin.readObject();
+         }
+         catch(ClassNotFoundException e) {
+            throw new RuntimeException("Klasse HashMap nicht gefunden");
          }
          catch(IOException e) {
             e.printStackTrace();
          }
-
       }
-      fibonacciHash = new HashMap<>();
-      fibonacciHash.put(0, 0L);
-      fibonacciHash.put(1, 1L);
+      else {
+         tempFibhash = new HashMap<>();
+         tempFibhash.put(0, 0L);
+         tempFibhash.put(1, 1L);
+      }
+      fibonacciHash = tempFibhash;
    }
 
    /**
