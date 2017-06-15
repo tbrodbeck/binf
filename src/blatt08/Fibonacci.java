@@ -1,6 +1,9 @@
 package blatt08;
-
+import java.io.File;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
 import java.util.HashMap;
+import java.io.IOException;
 
 /**
  * Class to calculate the Fibonacci number. Uses a HashMap to reduce the
@@ -17,6 +20,16 @@ public class Fibonacci {
     * Fill HashMap with initial key-value-pairs.
     */
    static {
+      File f = new File("fibhash.ser");
+      if (f.isFile()) {
+         try{
+            ObjectInputStream oin = new ObjectInputStream(new FileInputStream("fibhash.ser"));
+         }
+         catch(IOException e) {
+            e.printStackTrace();
+         }
+
+      }
       fibonacciHash = new HashMap<>();
       fibonacciHash.put(0, 0L);
       fibonacciHash.put(1, 1L);
