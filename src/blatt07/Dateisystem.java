@@ -14,7 +14,6 @@ public class Dateisystem {
 
     public Dateisystem(String verzeichnissname) {
         wurzeldatei = new File(verzeichnissname);
-        System.out.println(wurzeldatei.getAbsolutePath());
     }
 
     /**
