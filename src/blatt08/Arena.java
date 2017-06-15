@@ -16,7 +16,10 @@ public class Arena {
 
     /**
      * Schreiben sie eine Java-Klasse Arena, die die Methode int getArea(double x, double y) enthält und zurück
-     * gibt, in welchem der zwölf Bereiche sich ein Tribut mit der Position (x,y) beﬁndet.
+     * gibt, in welchem der zwölf Bereiche sich ein Tribut mit der Position (x,y) beﬁndet. Wenn sich der Tribut
+     * außerhalb der Arena beﬁndet, soll die Methode −1 zurück geben. Die Methoden in der Klasse java.lang.Math
+     * können dafür nützlich sein.
+     *
      * @param x
      * @param y
      * @return
