@@ -55,12 +55,18 @@ public class FileSystem {
       walkFile(rootPath, v);
    }
 
+   /**
+    * Methode die benutzt wird um FileSystem mit Visitor zu durchlaufen
+    * @param currentFile
+    * @param v
+    * @return
+    */
    private FileVisitResult walkFile(File currentFile, FileVisitor v) {
 
       if (!currentFile.canRead()) {
          return v.visitFailed(currentFile);
       }
-
+      //Directory -> sollen wir uns das anschauen oder nicht? Rekursiv oder nicht?
       if (currentFile.isDirectory()) {
          FileVisitResult response = v.preVisitDirectory(currentFile);
 
@@ -85,6 +91,7 @@ public class FileSystem {
             return response;
          }
       } else {
+         //File -> ganze große visitFile Methode aufrufen und ersetzen ...
          return v.visitFile(currentFile);
 
       }

@@ -19,6 +19,7 @@ public class Fibonacci {
    static {
       File f = new File("fibhash.ser");
       HashMap<Integer, Long> tempFibhash = null;
+      //wenn fibhash.ser schon gibt deserialisiere
       if (f.isFile()) {
          try{
             ObjectInputStream oin = new ObjectInputStream(new FileInputStream("fibhash.ser"));
@@ -31,6 +32,7 @@ public class Fibonacci {
             e.printStackTrace();
          }
       }
+      //sonst erstelle neue HashMap
       else {
          tempFibhash = new HashMap<>();
          tempFibhash.put(0, 0L);
@@ -77,6 +79,7 @@ public class Fibonacci {
       } catch (IllegalArgumentException ex) {
          printUsage();
       }
+      //HashMap serialisieren
       File f = new File("fibhash.ser");
       if(f.exists()) f.delete();
       try{
