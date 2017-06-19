@@ -25,6 +25,76 @@ public class Arena {
      * @return
      */
     public int getArea(double x, double y) {
+
+        double res;
+
+        // when outside
+        if ( Math.sqrt( Math.pow(Math.abs(x), 2) + Math.pow(Math.abs(y), 2) ) > 3)
+            return -1;
+
+        // when x or y = 0
+        if ( x == 0 ) {
+            if ( y > 0 )
+                return 1;
+            if ( y < 0 )
+                return 7;
+        }
+
+        if (y == 0) {
+            if (x > 0)
+                return 3;
+            if (x < 0)
+                return 9;
+        }
+
+        // position: right
+        if ( y > 0 ) {
+            // top
+            if (x > 0) {
+                res = Math.atan2( y, x);
+                if (res < Math.PI/6)
+                    return 3;
+                if (res < Math.PI*2/6)
+                    return 2;
+                if (res < Math.PI*3/6)
+                    return 1;
+            }
+            // bottom
+            if (x < 0) {
+                res = Math.atan2( y, -x);
+                if (res < Math.PI/6)
+                    return 10;
+                if (res < Math.PI*2/6)
+                    return 11;
+                if (res < Math.PI*3/6)
+                    return 12;
+            }
+        }
+        // left
+        if ( y < 0 ) {
+            // top
+            if (x > 0) {
+                res = Math.atan2( -y, x);
+                if (res < Math.PI/6)
+                    return 4;
+                if (res < Math.PI*2/6)
+                    return 5;
+                if (res < Math.PI*3/6)
+                    return 6;
+            }
+            //bottom
+            if (x < 0) {
+                res = Math.atan2( -y, -x);
+                if (res < Math.PI/6)
+                    return 9;
+                if (res < Math.PI*2/6)
+                    return 8;
+                if (res < Math.PI*3/6)
+                    return 7;
+            }
+        }
+
+        // when x = y = 0
         return -1;
     }
 }
