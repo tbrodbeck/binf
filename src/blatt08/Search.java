@@ -26,6 +26,7 @@ public class Search {
         }
         //Visitable und Visitor inizialisieren
         File f = new File(verzeichnis);
+        if(!f.exists()) throw new RuntimeException("Verzeichnis gibts nicht....");
         FileSystem fs = new FileSystem(f);
         Pattern p = Pattern.compile(search);
         ReplaceVisitor v = new ReplaceVisitor(f, rekursiv, p, replace);
