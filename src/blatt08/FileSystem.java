@@ -78,7 +78,6 @@ public class FileSystem {
                   return FileVisitResult.TERMINATE;
                }
             }
-            response = v.postVisitDirectory(currentFile);
 
          case SKIP_SUBTREE:
          case TERMINATE:
