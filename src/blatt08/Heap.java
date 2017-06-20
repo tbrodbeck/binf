@@ -36,7 +36,7 @@ public class Heap<E> implements Serializable{
    /*
     * The heap as Object[], it is not possible to instantiate a generic array.
     */
-   private transient Object[] heap;
+   private Object[] heap;
 
    private int size = 0;
 
@@ -295,31 +295,45 @@ public class Heap<E> implements Serializable{
          return comparator.compare(one, another);
       }
    }
+
    private void writeObject(ObjectOutputStream oout) {
       try {
-         oout.defaultWriteObject();
+            Object[] help1 = new Object[size];
+            Object[] help2;
+            // we copy only used slots of the heap
+            for (int i = 0; i < size; i++) {
+              if (heap[i].equals( null ))
+                  break;
+              help1[i] = heap[i];
+            }
+            help2 = heap;
+            // we write the shorter array
+            heap = help1;
+            oout.defaultWriteObject();
+            // we revert array to the original
+            heap = help2;
       } catch (IOException e) {
          e.printStackTrace();
-      }
-      for(int i=0; i<= size; i++) {
-         try{
-            oout.writeObject(heap[i]);
-         }
-         catch(IOException e){
-            e.printStackTrace();
-         }
       }
    }
 
    private void readObject(ObjectInputStream oin) {
       try {
-         oin.defaultReadObject();
+          oin.defaultReadObject();
+          // in case the array is below Default Capacity, we increase the size
+          Object[] help;
+          if(this.size <= DEFAULT_INITIAL_CAPACITY) {
+              help = new Object[DEFAULT_INITIAL_CAPACITY];
+              for (int i = 0; i < this.size; i++)
+                  help[i] = this.heap[i];
+              this.heap = help;
+          }
       } catch (IOException e) {
          e.printStackTrace();
       } catch (ClassNotFoundException e) {
          throw new RuntimeException("Klasse wurde verändert");
       }
-      if(this.size <= DEFAULT_INITIAL_CAPACITY) this.heap = new Object[DEFAULT_INITIAL_CAPACITY];
+
 
    }
 }
