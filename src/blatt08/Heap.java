@@ -296,6 +296,12 @@ public class Heap<E> implements Serializable{
       }
    }
 
+    /**
+     * Überschreiben Sie die Standard-Serialisierung soweit, dass der serialisierte Heap möglichst wenig Platz
+     * verbraucht. Dafür soll vor allem vermieden werden, dass null-Werte serialisiert werden.
+     *
+     * @param oout ObjectOutputStream
+     */
    private void writeObject(ObjectOutputStream oout) {
       try {
             Object[] help1 = new Object[size];
@@ -317,6 +323,11 @@ public class Heap<E> implements Serializable{
       }
    }
 
+    /**
+     * Liest serialisiertes Objekt ein.
+     *
+     * @param oin ObjectInputStream
+     */
    private void readObject(ObjectInputStream oin) {
       try {
           oin.defaultReadObject();

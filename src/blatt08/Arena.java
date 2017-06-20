@@ -20,9 +20,9 @@ public class Arena {
      * außerhalb der Arena beﬁndet, soll die Methode −1 zurück geben. Die Methoden in der Klasse java.lang.Math
      * können dafür nützlich sein.
      *
-     * @param x
-     * @param y
-     * @return
+     * @param x - Koordinate
+     * @param y - Koordinate
+     * @return int entsprechender Distrikt, der Arena
      */
     public int getArea(double x, double y) {
 
