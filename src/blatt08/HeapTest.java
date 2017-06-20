@@ -15,21 +15,21 @@ import java.io.*;
 public class HeapTest {
     public static void main(String[] args) {
 
-        Heap<Integer> h = new Heap<>();
-        Heap<Integer> h2 = null;
+        Heap<Integer> origin = new Heap<>();
+        Heap<Integer> copy = null;
 
         for (int i = 0; i<=10000; i++)
-            h.insert( i );
+            origin.insert( i );
 
         try (ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream("lib/Heap.ser"));){
-            o.writeObject(h);
+            o.writeObject(origin);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream( "lib/Heap.ser" ))) {
-            h2 = (Heap<Integer>) is.readObject();
+            copy = (Heap<Integer>) is.readObject();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -39,13 +39,13 @@ public class HeapTest {
         }
 
         for (int i = 0; i<=10000; i++) {
-            assert h.getFirst().equals( h2.getFirst() ) : "fail on " + i;
-            h.deleteFirst();
-            h2.deleteFirst();
+            assert origin.getFirst().equals( copy.getFirst() ) : "fail on " + i;
+            origin.deleteFirst();
+            copy.deleteFirst();
         }
 
-        assert h.empty() : "h not empty";
-        assert h2.empty() : "h2 not empty";
+        assert origin.empty() : "h not empty";
+        assert copy.empty() : "h2 not empty";
 
         System.out.println("Test beendet.");
     }
