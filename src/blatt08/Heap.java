@@ -321,8 +321,8 @@ public class Heap<E> implements Serializable{
       try {
           oin.defaultReadObject();
           // in case the array is below Default Capacity, we increase the size
-          Object[] help;
           if(this.size <= DEFAULT_INITIAL_CAPACITY) {
+              Object[] help;
               help = new Object[DEFAULT_INITIAL_CAPACITY];
               for (int i = 0; i < this.size; i++)
                   help[i] = this.heap[i];
