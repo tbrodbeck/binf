@@ -1,2 +1,2 @@
 condogenation....
-"-r" "cat" "dog" "/Users/Ronja/IdeaProjects/binf/lib"
+"-r" "dog" "dog" "/Users/Ronja/IdeaProjects/binf/lib"

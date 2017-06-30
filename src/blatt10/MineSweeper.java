@@ -44,6 +44,7 @@ public class MineSweeper {
         }
         else
             System.err.println("Bitte Höhe und Breite des Spielfeldes sowie die Anzahl der zufällig verteilten Bomben eingeben!");
+
     }
 
 }
