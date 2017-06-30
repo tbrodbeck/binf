@@ -104,6 +104,10 @@ public class MSModel extends Observable{
         return super.toString();
     }
 
+    public boolean getVerloren(){
+        return verloren;
+    }
+
     public static void main(String[] args) {
         //MSModel example = new MSModel(3,3,3);
     }
