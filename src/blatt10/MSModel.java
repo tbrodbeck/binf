@@ -21,6 +21,7 @@ public class MSModel extends Observable{
     //private int bomben;
     private int[][] field;
     private boolean[][] aufgedeckt;
+    private boolean verloren;
 
     public MSModel(int hoehe, int breite, int bomben) {
         if(hoehe < 0||breite < 0|| bomben <0) throw new IllegalArgumentException("Die Werte müssen positiv sein");
@@ -28,7 +29,6 @@ public class MSModel extends Observable{
         this.breite = breite;
         //this.bomben = bomben;
         aufgedeckt = new boolean[hoehe][breite];
-        System.out.println(aufgedeckt[0][0]);
         field = new int[hoehe][breite];
         initialize(bomben);
     }
@@ -72,6 +72,21 @@ public class MSModel extends Observable{
         }
     }
 
+    public void aufdecken(int i, int j) {
+        aufgedeckt[i][j] = true;
+        if(field[i][j] == -1) verloren = true;
+        if(field[i][j] == 0){
+            aufdecken(i-1,j-1);
+            aufdecken(i-1,j);
+            aufdecken(i-1,j+1);
+            aufdecken(i,j-1);
+            aufdecken(i,j+1);
+            aufdecken(i+1,j-1);
+            aufdecken(i+1,j);
+            aufdecken(i+1,j+1);
+        }
+
+    }
     public int[][] getField() {
         return field;
     }
@@ -90,6 +105,6 @@ public class MSModel extends Observable{
     }
 
     public static void main(String[] args) {
-        MSModel example = new MSModel(3,3,3);
+        //MSModel example = new MSModel(3,3,3);
     }
 }
