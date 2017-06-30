@@ -20,15 +20,12 @@ public class MineSweeper {
 
             MSModel model = null;
 
-            System.out.println(Integer.getInteger(args[0] ));
             try {
-                 model = new MSModel( Integer.getInteger( args[0] ), Integer.getInteger( args[1] ), Integer.getInteger( args[2] ) );
+                 model = new MSModel( Integer.parseInt( args[0] ), Integer.parseInt( args[1] ), Integer.parseInt( args[2] ) );
             }
             catch (ClassCastException e){
                 System.err.println( "Bitte nur Integer eingeben." );
             }
-
-            System.out.println(model);
 
         }
         else
