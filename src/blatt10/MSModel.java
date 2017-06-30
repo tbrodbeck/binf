@@ -66,7 +66,19 @@ public class MSModel extends Observable{
         int k = field[i][j];
         field[i][j] = k+1;
     }
-    
+
+    public Integer[][] getField() {
+        return field;
+    }
+
+    public int getHoehe() {
+        return hoehe;
+    }
+
+    public int getBreite() {
+        return breite;
+    }
+
     @Override
     public String toString() {
         return super.toString();
