@@ -1,5 +1,7 @@
 package blatt10;
 
+import javax.swing.*;
+
 /**
  * Führen Sie Model, View und Controller in einer separaten
  * Klasse zusammen. Diese sollte über die
@@ -21,11 +23,23 @@ public class MineSweeper {
             MSModel model = null;
 
             try {
-                 model = new MSModel( Integer.parseInt( args[0] ), Integer.parseInt( args[1] ), Integer.parseInt( args[2] ) );
+                model = new MSModel( Integer.parseInt( args[0] ), Integer.parseInt( args[1] ), Integer.parseInt( args[2] ) );
+
+                MSView view = new MSView(model);
+
+                JFrame frame = new JFrame("Mein Sweeper");
+
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setContentPane(view);
+
+                frame.pack();
+                frame.setVisible(true);
             }
-            catch (ClassCastException e){
+
+            catch (NumberFormatException e){
                 System.err.println( "Bitte nur Integer eingeben." );
             }
+
 
         }
         else

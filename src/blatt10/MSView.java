@@ -12,9 +12,11 @@ public class MSView extends JPanel implements Observer{
 
     JButton feld;
     JLabel anzahl;
+    MSModel model;
 
-    public MSView() {
+    public MSView(MSModel model) {
 
+        this.model = model;
         this.feld = new JButton(  );
         this.feld.addMouseListener( new MSController() );
     }
