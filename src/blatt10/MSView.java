@@ -11,7 +11,7 @@ import java.util.Observer;
  */
 public class MSView extends JPanel implements Observer{
 
-    JButton[][] feld;
+    JComponent[][] felder;
     MSModel model;
 
     public MSView(MSModel model) {
@@ -19,21 +19,24 @@ public class MSView extends JPanel implements Observer{
         this.model = model;
         this.model.addObserver(this);
 
-        this.setLayout(new GridLayout());
-
         int[][] field = model.getField();
+        int hoehe = model.getHoehe();
+        int breite = model.getBreite();
 
-        this.feld = new JButton[field.length][field[0].length];
+        this.setLayout(new GridLayout(hoehe,breite));
 
-        for (int i = 0; i < field.length ; i++) {
+        System.out.println(model.getHoehe());
+        System.out.println(model.getBreite());
+
+        this.felder = new JComponent[hoehe][breite];
+
+        for (int i = 0; i < hoehe ; i++) {
             JPanel row = new JPanel(  );
-            for (int j = 0; j < field[i].length; j++) {
-                this.feld[i][j] = new JButton();
-                this.feld[i][j].addMouseListener( new MSController() );
-                row.add(this.feld[i][j]);
+            for (int j = 0; j < breite; j++) {
+                this.felder[i][j] = new JButton();
+                this.felder[i][j].addMouseListener( new MSController() );
+                this.add( this.felder[i][j] );
             }
-            this.add(row);
-
         }
 
 
@@ -52,12 +55,5 @@ public class MSView extends JPanel implements Observer{
     @Override
     public void update(Observable o, Object arg) {
 
-
-        int[][] dummy = new int[99][99];
-        for (int i = 0; i < dummy.length ; i++) {
-            for (int j = 0; j < dummy[i].length; j++) {
-                this.feld[i][j].setText( "updated");
-            }
-        }
     }
 }

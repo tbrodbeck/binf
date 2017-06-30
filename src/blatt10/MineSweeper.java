@@ -20,30 +20,31 @@ public class MineSweeper {
     public static void main(String[] args) {
         if (args.length == 3) {
 
-            MSModel model = null;
-
             try {
-                model = new MSModel( Integer.parseInt( args[0] ), Integer.parseInt( args[1] ), Integer.parseInt( args[2] ) );
 
+                // Erzeugen des Models
+                MSModel model = new MSModel( Integer.parseInt( args[0] ), Integer.parseInt( args[1] ), Integer.parseInt( args[2] ) );
+
+                // Erzeugen des Views
                 MSView view = new MSView(model);
 
+                // Darstellung
                 JFrame frame = new JFrame("Mein Sweeper");
-
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setContentPane(view);
-
                 frame.pack();
                 frame.setVisible(true);
-            }
 
+
+            }
             catch (NumberFormatException e){
                 System.err.println( "Bitte nur Integer eingeben." );
             }
-
-
         }
         else
             System.err.println("Bitte Höhe und Breite des Spielfeldes sowie die Anzahl der zufällig verteilten Bomben eingeben!");
+
+
 
     }
 
