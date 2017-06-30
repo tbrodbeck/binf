@@ -73,19 +73,20 @@ public class MSModel extends Observable{
     }
 
     public void aufdecken(int i, int j) {
-        aufgedeckt[i][j] = true;
-        if(field[i][j] == -1) verloren = true;
-        if(field[i][j] == 0){
-            aufdecken(i-1,j-1);
-            aufdecken(i-1,j);
-            aufdecken(i-1,j+1);
-            aufdecken(i,j-1);
-            aufdecken(i,j+1);
-            aufdecken(i+1,j-1);
-            aufdecken(i+1,j);
-            aufdecken(i+1,j+1);
+        if(i>=0 && j>=0 && i<hoehe && j<breite) {
+            aufgedeckt[i][j] = true;
+            if (field[i][j] == -1) verloren = true;
+            if (field[i][j] == 0) {
+                aufdecken(i - 1, j - 1);
+                aufdecken(i - 1, j);
+                aufdecken(i - 1, j + 1);
+                aufdecken(i, j - 1);
+                aufdecken(i, j + 1);
+                aufdecken(i + 1, j - 1);
+                aufdecken(i + 1, j);
+                aufdecken(i + 1, j + 1);
+            }
         }
-
     }
     public int[][] getField() {
         return field;
