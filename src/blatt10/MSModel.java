@@ -20,12 +20,15 @@ public class MSModel extends Observable{
     private int breite;
     //private int bomben;
     private int[][] field;
+    private boolean[][] aufgedeckt;
 
     public MSModel(int hoehe, int breite, int bomben) {
         if(hoehe < 0||breite < 0|| bomben <0) throw new IllegalArgumentException("Die Werte müssen positiv sein");
         this.hoehe = hoehe;
         this.breite = breite;
         //this.bomben = bomben;
+        aufgedeckt = new boolean[hoehe][breite];
+        System.out.println(aufgedeckt[0][0]);
         field = new int[hoehe][breite];
         initialize(bomben);
     }
@@ -63,8 +66,10 @@ public class MSModel extends Observable{
     }
 
     private void hochzaehlen(int i, int j){
-        int k = field[i][j];
-        field[i][j] = k+1;
+        if(i>=0 && j>=0 && i<hoehe && j<breite) {
+            int k = field[i][j];
+            field[i][j] = k + 1;
+        }
     }
 
     public int[][] getField() {
@@ -82,5 +87,9 @@ public class MSModel extends Observable{
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    public static void main(String[] args) {
+        MSModel example = new MSModel(3,3,3);
     }
 }
