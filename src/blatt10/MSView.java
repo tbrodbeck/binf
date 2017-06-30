@@ -1,6 +1,7 @@
 package blatt10;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -10,15 +11,33 @@ import java.util.Observer;
  */
 public class MSView extends JPanel implements Observer{
 
-    JButton feld;
-    JLabel anzahl;
+    JButton[][] feld;
     MSModel model;
 
     public MSView(MSModel model) {
 
         this.model = model;
-        this.feld = new JButton(  );
-        this.feld.addMouseListener( new MSController() );
+        this.model.addObserver(this);
+
+        this.setLayout(new GridLayout());
+
+        int[][] field = model.getField();
+
+        this.feld = new JButton[field.length][field[0].length];
+
+        for (int i = 0; i < field.length ; i++) {
+            JPanel row = new JPanel(  );
+            for (int j = 0; j < field[i].length; j++) {
+                this.feld[i][j] = new JButton();
+                this.feld[i][j].addMouseListener( new MSController() );
+                row.add(this.feld[i][j]);
+            }
+            this.add(row);
+
+        }
+
+
+
     }
 
     /**
@@ -32,6 +51,13 @@ public class MSView extends JPanel implements Observer{
      */
     @Override
     public void update(Observable o, Object arg) {
-        this.anzahl.setText( "Anzahl der Biere" );
+
+
+        int[][] dummy = new int[99][99];
+        for (int i = 0; i < dummy.length ; i++) {
+            for (int j = 0; j < dummy[i].length; j++) {
+                this.feld[i][j].setText( "updated");
+            }
+        }
     }
 }

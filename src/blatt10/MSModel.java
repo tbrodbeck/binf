@@ -19,29 +19,29 @@ public class MSModel extends Observable{
     private int hoehe;
     private int breite;
     //private int bomben;
-    private Integer[][] field;
+    private int[][] field;
 
     public MSModel(int hoehe, int breite, int bomben) {
         if(hoehe < 0||breite < 0|| bomben <0) throw new IllegalArgumentException("Die Werte müssen positiv sein");
         this.hoehe = hoehe;
         this.breite = breite;
         //this.bomben = bomben;
-        field = new Integer[hoehe][breite];
+        field = new int[hoehe][breite];
         initialize(bomben);
     }
 
     private void initialize(int bomben) {
         //alles auf Null setzen
-        for(int i; i <= hoehe; i++) {
-            for(int j; j <= breite; j++){
+        for(int i = 0; i < hoehe; i++) {
+            for(int j = 0; j < breite; j++){
                 field[i][j] = 0;
             }
         }
         Random random = new Random();
         //Bomben einfügen
-        for(int i = 1; i<=bomben; i++) {
-            int k = random.nextInt(hoehe);
-            int l = random.nextInt(breite);
+        for(int i = 1; i<bomben; i++) {
+            int k = random.nextInt(hoehe-1);
+            int l = random.nextInt(breite-1);
             //wenn es da schon ne Bombe gibt zähle nicht hoch
             if (field[k][l] == -1) i--;
             else {
@@ -67,7 +67,7 @@ public class MSModel extends Observable{
         field[i][j] = k+1;
     }
 
-    public Integer[][] getField() {
+    public int[][] getField() {
         return field;
     }
 
