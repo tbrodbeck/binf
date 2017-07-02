@@ -8,6 +8,13 @@ import java.awt.event.MouseEvent;
  * @version 29.06.17
  */
 public class MSController extends MouseAdapter{
+
+    private MSModel model;
+
+    public MSController(MSModel m){
+        this.model = m;
+    }
+
     /**
      * {@inheritDoc}
      *

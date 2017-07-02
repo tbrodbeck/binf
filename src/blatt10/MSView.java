@@ -1,3 +1,7 @@
+//weiß nicht ganz ob das mit dem Einfügen so funktioniert wie das soll
+//und  ob man das Fesamte auch noch mal Updaten muss wenn eins der FieldViews sich ändert oder ob das dass
+//schon automatisch macht
+//update methode muss noch geschrieben werden damit man sieht wann das Spiel verloren ist
 package blatt10;
 
 import javax.swing.*;
@@ -9,48 +13,40 @@ import java.util.Observer;
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 29.06.17
  */
-public class MSView extends JPanel implements Observer{
+public class MSView extends JPanel implements Observer {
 
-    JComponent[][] felder;
-    MSModel model;
+    //JPanel[][] panels;
+    //MSModel model;
 
     public MSView(MSModel model) {
 
-        this.model = model;
-        this.model.addObserver(this);
-
-        int[][] field = model.getField();
+         //this.model = model;
+        //Panel initializieren
         int hoehe = model.getHoehe();
         int breite = model.getBreite();
 
-        this.setLayout(new GridLayout(hoehe,breite));
+        this.setLayout(new GridLayout(hoehe, breite));
 
-        System.out.println(model.getHoehe());
-        System.out.println(model.getBreite());
+        Feld[][] felder = model.getFelder();
 
-        this.felder = new JComponent[hoehe][breite];
-
-        for (int i = 0; i < hoehe ; i++) {
-            JPanel row = new JPanel(  );
+        //this.panels = new JPanel[hoehe][breite];
+        //FieldViews erstellen und einfügen
+         for (int i = 0; i < hoehe ; i++) {
+         //JPanel row = new JPanel();
             for (int j = 0; j < breite; j++) {
-                this.felder[i][j] = new JButton();
-                this.felder[i][j].addMouseListener( new MSController() );
-                this.add( this.felder[i][j] );
+                this.add(new FeldView(this,felder[i][j]).getPanel());
             }
-        }
+         }
 
 
 
     }
 
     /**
-     * This method is called whenever the observed object is changed. An
-     * application calls an <tt>Observable</tt> object's
-     * <code>notifyObservers</code> method to have all the object's
-     * observers notified of the change.
+     * change display when game is lost
      *
-     * @param o   the observable object.
-     * @param arg an argument passed to the <code>notifyObservers</code>
+     * @param o
+     * @param arg
      */
     @Override
     public void update(Observable o, Object arg) {

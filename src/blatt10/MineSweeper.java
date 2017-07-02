@@ -1,3 +1,4 @@
+//hab ich nichts dran verändert, weiß nicht ob es funktioniert hat und ob man es noch anpassen muss
 package blatt10;
 
 import javax.swing.*;
@@ -43,8 +44,6 @@ public class MineSweeper {
         }
         else
             System.err.println("Bitte Höhe und Breite des Spielfeldes sowie die Anzahl der zufällig verteilten Bomben eingeben!");
-
-
 
     }
 
