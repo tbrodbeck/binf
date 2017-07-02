@@ -1,5 +1,6 @@
 //hier musst du noch was machen (Konstruktor, initialisieren, usw)
 //hab bisher nur die Sachen die wir nicht mehr brauchen rausgelöscht und nen paar Sachen auskommentiert
+//
 package blatt10;
 
 import java.util.Random;
