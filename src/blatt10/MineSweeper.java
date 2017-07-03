@@ -29,6 +29,7 @@ public class MineSweeper {
                 // Erzeugen des Views
                 MSView view = new MSView(model);
 
+
                 // Darstellung
                 JFrame frame = new JFrame("Mein Sweeper");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -18,7 +18,7 @@ public class Feld extends Observable{
     }
 
 
-    public void makeBombe(){
+    public void setBombe(){
         wert = -1;
     }
 
@@ -43,7 +43,9 @@ public class Feld extends Observable{
      */
     public void calculateWert() {
       for(Feld f: nachbarn) {
-          if (f.getBombe()) wert++;
+          if (f == null);
+          else if (f.getBombe())
+            wert++;
       }
     }
 
@@ -53,7 +55,8 @@ public class Feld extends Observable{
     public void aufdecken(){
         aufgedeckt = true;
         if(wert == 0) {
-            for(Feld f: nachbarn) if(f.wert!=-1) f.aufdecken();
+            for(Feld f: nachbarn)
+                if(f != null && !f.aufgedeckt && f.wert!=-1) f.aufdecken();
         }
         setChanged();
         notifyObservers(this);

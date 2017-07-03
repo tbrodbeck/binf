@@ -1,7 +1,5 @@
-//hier musst du noch was machen (Konstruktor, initialisieren, usw)
-//hab bisher nur die Sachen die wir nicht mehr brauchen rausgelöscht und nen paar Sachen auskommentiert
-//
 package blatt10;
+
 
 import java.util.Random;
 
@@ -16,59 +14,86 @@ import java.util.Random;
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 29.06.17
  */
-public class MSModel{
+public class MSModel {
 
     private int hoehe;
     private int breite;
-    //private int bomben;
     private Feld[][] felder;
 
     public MSModel(int hoehe, int breite, int bomben) {
-        if(hoehe < 0||breite < 0|| bomben <0) throw new IllegalArgumentException("Die Werte müssen positiv sein");
+        if(hoehe < 0||breite < 0|| bomben <0 || bomben >= breite * hoehe) throw new IllegalArgumentException("Die Werte müssen positiv sein");
         this.hoehe = hoehe;
         this.breite = breite;
         felder = new Feld[hoehe][breite];
-        //initialize(bomben);
-
+        initialize(bomben, felder);
     }
 
-    private void initialize(int bomben) {
-        //for(int i = 0; i < hoehe; i++) {
-          //  for(int j = 0; j < breite; j++){
-            //    field[i][j] = 0;
-            //}
-       // }
-        Random random = new Random();
+    /**
+     * Startposition zufällig erstellen
+     * @param bomben Anzahl der Bomben
+     * @param felder Spielfeld
+     */
+    private void initialize(int bomben, Feld[][] felder) {
+
+        // Felder erstellen
+        for (int i = 0; i < hoehe; i++) {
+            for (int j = 0; j < breite; j++) {
+                felder[i][j] = new Feld();
+            }
+        }
+
         //Bomben einfügen
-        for(int i = 1; i<bomben; i++) {
-            int k = random.nextInt(hoehe-1);
-            int l = random.nextInt(breite-1);
+        Random random = new Random();
+        for (int b = 1; b < bomben; b++) {
+            int i = random.nextInt( hoehe - 1 );
+            int j = random.nextInt( breite - 1 );
             //wenn es da schon ne Bombe gibt zähle nicht hoch
-           // if (field[k][l] == -1) i--;
-            //else {
-              //  field[k][l] = -1;
-                //updateNeighbours(k,l);
-            //}
+            if (felder[i][j].getBombe())
+                b--;
+            else
+                felder[i][j].setBombe();
         }
+
+        // Nachbaren initialisieren
+        for (int i = 0; i < hoehe; i++) {
+            for (int j = 0; j < breite; j++) {
+                felder[i][j].setNachbarn( listNachbaren( i, j ) );
+            }
+        }
+
     }
 
-    /**private void updateNeighbours(int i, int j){
-        hochzaehlen(i-1, j-1);
-        hochzaehlen(i-1, j);
-        hochzaehlen(i-1, j+1);
-        hochzaehlen(i, j-1);
-        hochzaehlen(i, j+1);
-        hochzaehlen(i+1, j-1);
-        hochzaehlen(i+1, j);
-        hochzaehlen(i+1, j+1);
-    }*/
+    /**
+     * Nachbaren eines Feldes auflisten
+     * @param i
+     * @param j
+     * @return Liste der Nachbaren
+     */
+    private Feld[] listNachbaren(int i, int j){
+        Feld[] list = new Feld[8];
+        list[0] = getEintrag(i-1, j-1);
+        list[1] = getEintrag(i-1, j);
+        list[2] = getEintrag(i-1, j+1);
+        list[3] = getEintrag(i, j-1);
+        list[4] = getEintrag(i, j+1);
+        list[5] = getEintrag(i+1, j-1);
+        list[6] = getEintrag(i+1, j);
+        list[7] = getEintrag(i+1, j+1);
+        return list;
+    }
 
-    /**private void hochzaehlen(int i, int j){
-        if(i>=0 && j>=0 && i<hoehe && j<breite) {
-            int k = field[i][j];
-            field[i][j] = k + 1;
+    /**
+     * Feld aus Spielfeld
+     * @param i
+     * @param j
+     * @return Feld oder null
+     */
+    private Feld getEintrag(int i, int j) {
+        if (i>=0 && j>=0 && i<hoehe && j<breite) {
+            return felder[i][j];
         }
-    }*/
+        else return null;
+    }
 
     /**public void aufdecken(int i, int j) {
         if(i>=0 && j>=0 && i<hoehe && j<breite) {
@@ -86,7 +111,10 @@ public class MSModel{
             }
         }
     }*/
-    public Feld[][] getFelder(){return felder;}
+
+    public Feld[][] getFelder() {
+        return felder;
+    }
 
     public int getHoehe() {
         return hoehe;
@@ -96,12 +124,4 @@ public class MSModel{
         return breite;
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
-    public static void main(String[] args) {
-        //MSModel example = new MSModel(3,3,3);
-    }
 }

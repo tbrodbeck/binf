@@ -39,7 +39,7 @@ public class FeldView extends Observable implements Observer{
         //Button der dagestellt wird wenn wir einen flagged Button haben
         flagged = new JButton("F");
         flagged.addMouseListener(new FlaggedController(model));
-        darstellen();
+        erstellen();
     }
 
     /**
@@ -50,25 +50,20 @@ public class FeldView extends Observable implements Observer{
      */
     @Override
     public void update(Observable o, Object arg) {
-        darstellen();
         //wenn verloren wird MSView notified
         if(((Feld)arg).getBombe())  {
             setChanged();
             notifyObservers();
         }
+        darstellen();
     }
 
-    /**
-     * neues JPanel erstellen das aktuellem Zustand entsprechend richtige Component enhält
-     */
-    public void darstellen(){
-        //neues Panel erstellen
-        panel = new JPanel();
+    public void darstellen() {
         //Fall nicht aufgedekct
         if(!model.getAufgedeckt()){
             //Fall flagged
             if(model.getFlagged()) {
-               panel.add(flagged);
+                panel.add(flagged);
             }
             //Fall nicht flagged
             else panel.add(button);
@@ -77,6 +72,15 @@ public class FeldView extends Observable implements Observer{
         else{
             panel.add(label);
         }
+    }
+
+    /**
+     * neues JPanel erstellen das aktuellem Zustand entsprechend richtige Component enhält
+     */
+    public void erstellen(){
+        //neues Panel erstellen
+        panel = new JPanel();
+        darstellen();
     }
 
     public JPanel getPanel(){

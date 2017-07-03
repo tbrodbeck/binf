@@ -34,7 +34,9 @@ public class MSView extends JPanel implements Observer {
          for (int i = 0; i < hoehe ; i++) {
          //JPanel row = new JPanel();
             for (int j = 0; j < breite; j++) {
-                this.add(new FeldView(this,felder[i][j]).getPanel());
+                FeldView fv = new FeldView(this,felder[i][j]);
+                felder[i][j].addObserver( fv );
+                this.add(fv.getPanel());
             }
          }
 
