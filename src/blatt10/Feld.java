@@ -38,7 +38,8 @@ public class Feld extends Observable{
      */
     public void setNachbarn(Feld[] nachbarn){
         this.nachbarn = nachbarn;
-        calculateWert();
+        if (!this.getBombe())
+            calculateWert();
     }
 
     /**
@@ -46,8 +47,7 @@ public class Feld extends Observable{
      */
     public void calculateWert() {
       for(Feld f: nachbarn) {
-          if (f == null);
-          else if (f.getBombe())
+          if (f != null && f.getBombe())
             wert++;
       }
     }

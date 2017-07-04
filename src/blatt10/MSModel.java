@@ -39,7 +39,7 @@ public class MSModel extends Observable {
     private int numberOfRevealed;
 
     public MSModel(int hoehe, int breite, int bomben) {
-        if(hoehe < 0||breite < 0|| bomben <0 || bomben >= breite * hoehe) throw new IllegalArgumentException("Die Werte müssen positiv sein");
+        if(hoehe < 0||breite < 0|| bomben <0 || bomben >= breite * hoehe) throw new IllegalArgumentException("Die Werte müssen positiv sein und nicht mehr Bomben als Felder");
         this.hoehe = hoehe;
         this.breite = breite;
         zustand = 0;
@@ -63,7 +63,7 @@ public class MSModel extends Observable {
 
         //Bomben einfügen
         Random random = new Random();
-        for (int b = 1; b < bomben; b++) {
+        for (int b = 0; b < bomben; b++) {
             int i = random.nextInt( hoehe - 1 );
             int j = random.nextInt( breite - 1 );
             //wenn es da schon ne Bombe gibt zähle nicht hoch
@@ -90,14 +90,14 @@ public class MSModel extends Observable {
      */
     private Feld[] listNachbaren(int i, int j){
         Feld[] list = new Feld[8];
-        list[0] = getEintrag(i-1, j-1);
-        list[1] = getEintrag(i-1, j);
-        list[2] = getEintrag(i-1, j+1);
-        list[3] = getEintrag(i, j-1);
-        list[4] = getEintrag(i, j+1);
+        list[0] = getEintrag(i-1, j);
+        list[1] = getEintrag(i-1, j+1);
+        list[2] = getEintrag(i, j+1);
+        list[3] = getEintrag(i+1, j+1);
+        list[4] = getEintrag(i+1, j);
         list[5] = getEintrag(i+1, j-1);
-        list[6] = getEintrag(i+1, j);
-        list[7] = getEintrag(i+1, j+1);
+        list[6] = getEintrag(i, j);
+        list[7] = getEintrag(i, j-1);
         return list;
     }
 
@@ -141,6 +141,23 @@ public class MSModel extends Observable {
         this.notifyObservers();
     }
 
+
+    public int getNumberOfBombs() {
+        return numberOfBombs;
+    }
+
+    public int getNumberOfFlags() {
+        return numberOfFlags;
+    }
+
+    public int getNumberOfRevealed() {
+        return numberOfRevealed;
+    }
+
+    public int getZustand() {
+
+        return zustand;
+    }
 
     public void flagChanged(Feld f) {
 

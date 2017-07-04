@@ -4,86 +4,85 @@
 package blatt10;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
 /**
  * Created by Ronja on 02.07.17.
  */
-public class FeldView extends Observable implements Observer{
+public class FeldView extends JPanel implements Observer {
     private MSView msView;
-    private Feld model;
-    private JPanel panel;
+    private Feld feld;
     private JButton button;
     private JButton flagged;
     private JLabel label;
+    private static final String BUTTON = "button";
+    private static final String LABEL = "label";
 
 
-
-    public FeldView(MSView msView,Feld model) {
+    public FeldView(MSView msView, Feld feld) {
         //gebraucht um MSView zum Observer zu machen damit Spiel verloren werden kann
         this.msView = msView;
-        this.addObserver(msView);
-        this.model = model;
+
+        this.feld = feld;
         //Button der dargestellt wird wenn wir einen normalen Button haben
         button = new JButton();
         //Label das dargestellt wird wenn wir aufgedeckt sind
         label = new JLabel();
-        if(model.getBombe()) {
-            label.setText("B");
+        label.setHorizontalAlignment( JLabel.CENTER );
+        this.setLayout( new CardLayout() );
+        this.add( button, BUTTON );
+        this.add( label, LABEL );
+        feld.addObserver( this );
+        label.setPreferredSize( new Dimension( 40, 40 ) );
+        if (feld.getBombe()) {
+            label.setText( "B" );
         }
-        if(model.getWert() > 0) {
-            label.setText(String.valueOf(model.getWert()));
+        if (feld.getWert() > 0) {
+            label.setText( String.valueOf( feld.getWert() ) );
         }
-        button.addMouseListener(new FeldController(model));
+        button.addMouseListener( new FeldController( feld ) );
         //Button der dagestellt wird wenn wir einen flagged Button haben
-        flagged = new JButton("F");
-        flagged.addMouseListener(new FlaggedController(model));
-        erstellen();
+        flagged = new JButton( "F" );
+        flagged.addMouseListener( new FlaggedController( feld ) );
     }
 
     /**
      * wird aufgerufen wenn auf Button aufgedeckt/geflagged wird
      * verändert den Inhalt des Panels
+     *
      * @param o
      * @param arg Feld damit es überprüfen kann ob wir ne Bombe getroffen haben
      */
     @Override
     public void update(Observable o, Object arg) {
-        //wenn verloren wird MSView notified
-        if(((Feld)arg).getBombe())  {
-            setChanged();
-            notifyObservers();
-        }
-        darstellen();
-    }
+        CardLayout layout = (CardLayout) this.getLayout();
+        if (this.feld.getAufgedeckt()) {
 
-    public void darstellen() {
-        //Fall nicht aufgedekct
-        if(!model.getAufgedeckt()){
-            //Fall flagged
-            if(model.getFlagged()) {
-                panel.add(flagged);
+            int count = this.feld.getWert();
+
+            if (button.isShowing()) {
+                layout.show( this, LABEL );
             }
-            //Fall nicht flagged
-            else panel.add(button);
-        }
-        //Fall aufgedeckt
-        else{
-            panel.add(label);
-        }
-    }
 
-    /**
-     * neues JPanel erstellen das aktuellem Zustand entsprechend richtige Component enhält
-     */
-    public void erstellen(){
-        //neues Panel erstellen
-        panel = new JPanel();
-        darstellen();
-    }
+            if (this.feld.getBombe()) {
+                label.setText( "B" );
+            } else if (count == 0) {
+                label.setText( " " );
+            } else {
+                label.setText( "" + count );
+            }
 
-    public JPanel getPanel(){
-        return this.panel;
+        } else {
+            if (label.isShowing()) {
+                layout.show( this, BUTTON );
+            }
+            if (this.feld.getFlagged()) {
+                button.setText( "!" );
+            } else {
+                button.setText( "" );
+            }
+        }
     }
 }

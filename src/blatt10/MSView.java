@@ -39,10 +39,11 @@ public class MSView extends JPanel implements Observer {
          for (int i = 0; i < hoehe ; i++) {
          //JPanel row = new JPanel();
             for (int j = 0; j < breite; j++) {
-                FeldView fv = new FeldView(this,felder[i][j]);
-                felder[i][j].addObserver( fv );
-                feld.add(fv.getPanel());
+                feld.add(new FeldView(this,felder[i][j]));
             }
+
+         this.nachricht.setText("Spiel im Gange" + " "
+                     + model.getNumberOfBombs());
          this.add(this.nachricht, BorderLayout.NORTH);
          this.add(this.feld, BorderLayout.CENTER);
 
@@ -61,6 +62,13 @@ public class MSView extends JPanel implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
+        if(model.getZustand() == 1)
+            JOptionPane.showMessageDialog(this.getParent(), "Sie haben gewonnen", "Spiel vorbei!", JOptionPane.INFORMATION_MESSAGE);
+        else if (model.getZustand() == -1)
+            JOptionPane.showMessageDialog(this.getParent(), "Sie haben verloren", "Spiel vorbei!", JOptionPane.INFORMATION_MESSAGE);
+        else
+            nachricht.setText("Spiel im gange:" +" "
+                    + (model.getNumberOfBombs() - model.getNumberOfFlags()));
 
     }
 }
