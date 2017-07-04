@@ -24,24 +24,18 @@ public class MSModel extends Observable {
     private Feld[][] felder;
     private int zustand;
 
-    private int numberOfBombs;
-
-    /**
-     * The actual number of flags set on all {@code Field} elements of this
-     * {@code GameBoard}.
-     */
-    private int numberOfFlags;
-
-    /**
-     * The actual number of revealed {@code Field} elements of this
-     * {@code GameBoard}.
-     */
-    private int numberOfRevealed;
+    private int anzahlBomben;
+    private int anzahlFlaggen;
+    private int anzahlAufgedeckt;
 
     public MSModel(int hoehe, int breite, int bomben) {
         if(hoehe < 0||breite < 0|| bomben <0 || bomben >= breite * hoehe) throw new IllegalArgumentException("Die Werte müssen positiv sein und nicht mehr Bomben als Felder");
+
+        System.out.println("Größe: " + hoehe + "*" + breite + " Bomben: " + bomben);
+
         this.hoehe = hoehe;
         this.breite = breite;
+        this.anzahlBomben = bomben;
         zustand = 0;
         felder = new Feld[hoehe][breite];
         initialize(bomben, felder);
@@ -96,8 +90,8 @@ public class MSModel extends Observable {
         list[3] = getEintrag(i+1, j+1);
         list[4] = getEintrag(i+1, j);
         list[5] = getEintrag(i+1, j-1);
-        list[6] = getEintrag(i, j);
-        list[7] = getEintrag(i, j-1);
+        list[6] = getEintrag(i, j-1);
+        list[7] = getEintrag(i-1, j-1);
         return list;
     }
 
@@ -126,13 +120,15 @@ public class MSModel extends Observable {
         return breite;
     }
 
-
-    public void fieldRevealed(Feld f) {
-
-        this.numberOfRevealed++;
+    /**
+     * Ergeignis: neues Feld wird aufgedeckt
+     * @param f Feld
+     */
+    public void feldAufgedeckt(Feld f) {
+        this.anzahlAufgedeckt++;
         if (f.getBombe()) {
             this.zustand = -1;
-        } else if (numberOfRevealed + numberOfBombs == felder.length
+        } else if (anzahlAufgedeckt + anzahlBomben == felder.length
                 * felder[0].length) {
             this.zustand = 1;
         }
@@ -142,16 +138,16 @@ public class MSModel extends Observable {
     }
 
 
-    public int getNumberOfBombs() {
-        return numberOfBombs;
+    public int getAnzahlBomben() {
+        return anzahlBomben;
     }
 
-    public int getNumberOfFlags() {
-        return numberOfFlags;
+    public int getAnzahlFlaggen() {
+        return anzahlFlaggen;
     }
 
-    public int getNumberOfRevealed() {
-        return numberOfRevealed;
+    public int getAnzahlAufgedeckt() {
+        return anzahlAufgedeckt;
     }
 
     public int getZustand() {
@@ -159,12 +155,16 @@ public class MSModel extends Observable {
         return zustand;
     }
 
-    public void flagChanged(Feld f) {
+    /**
+     * Ereignis: Flagge wurde verändert
+     * @param f Feld
+     */
+    public void flaggenChange(Feld f) {
 
         if (f.getFlagged()) {
-            this.numberOfFlags++;
+            this.anzahlFlaggen++;
         } else {
-            this.numberOfFlags--;
+            this.anzahlFlaggen--;
         }
 
         this.setChanged();

@@ -1,11 +1,13 @@
-//in sich schlüssig
-//Instanzen müssen erstellt  werden und mit setNachbarn Nachbarn übergeben bekommen damit es funktioniert
+
 package blatt10;
 import java.util.Observable;
 /**
+ * Ein Model von einem jedem Feld.
+ *
  * Created by Ronja on 02.07.17.
  */
 public class Feld extends Observable{
+    // codierung: -1: Bombe, sonst Wert von 0-8
     private int wert;
     private boolean aufgedeckt;
     private Feld[] nachbarn;
@@ -24,11 +26,15 @@ public class Feld extends Observable{
         wert = -1;
     }
 
+    /**
+     * Flagge setzen oder entfernen
+     * @param b
+     */
     public void setFlagged(boolean b){
         flagged = !flagged;
         setChanged();
         notifyObservers(this);
-        model.flagChanged( this );
+        model.flaggenChange( this );
     }
 
     /**
@@ -56,14 +62,17 @@ public class Feld extends Observable{
      * macht Objekt aufgedeckt und ruft sich rekursiv für Nachbarn auf
      */
     public void aufdecken(){
-        aufgedeckt = true;
-        if(wert == 0) {
-            for(Feld f: nachbarn)
-                if(f != null && !f.aufgedeckt && f.wert!=-1) f.aufdecken();
+        if (!flagged) {
+            aufgedeckt = true;
+            if (wert == 0) {
+                for (Feld f : nachbarn)
+                    if (f != null && !f.aufgedeckt && f.wert != -1)
+                        f.aufdecken();
+            }
+            setChanged();
+            notifyObservers( this );
+            model.feldAufgedeckt( this );
         }
-        setChanged();
-        notifyObservers(this);
-        model.fieldRevealed(this);
     }
 
     public boolean getBombe(){

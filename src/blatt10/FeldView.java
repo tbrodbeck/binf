@@ -1,6 +1,4 @@
-//in sich schlüssig
-//musst du wenn es keinen Fehler gibt (glaube ich) nicht mehr benutzen
-//wird von MSView verwendet um kleine Panels zu erstellen
+
 package blatt10;
 
 import javax.swing.*;
@@ -9,6 +7,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
+ * Darstellung eines Feldes
+ *
  * Created by Ronja on 02.07.17.
  */
 public class FeldView extends JPanel implements Observer {

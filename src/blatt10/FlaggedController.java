@@ -1,5 +1,5 @@
-//in sich schlüssig
-//musst du wenn es keinen Fehler gibt (glaube ich) nicht mehr benutzen
+
+
 package blatt10;
 
 import java.awt.event.MouseEvent;

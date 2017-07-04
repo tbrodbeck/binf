@@ -1,4 +1,4 @@
-//hab ich nichts dran verändert, weiß nicht ob es funktioniert hat und ob man es noch anpassen muss
+
 package blatt10;
 
 import javax.swing.*;
@@ -22,7 +22,6 @@ public class MineSweeper {
         if (args.length == 3) {
 
             try {
-
                 // Erzeugen des Models
                 MSModel model = new MSModel( Integer.parseInt( args[0] ), Integer.parseInt( args[1] ), Integer.parseInt( args[2] ) );
 

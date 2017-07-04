@@ -1,10 +1,11 @@
-//in sich schlüssig
-//musst du wenn es keinen Fehler gibt (glaube ich) nicht mehr benutzen
+
 package blatt10;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
+ * Controller eines Feldes
+ *
  * Created by Ronja on 02.07.17.
  */
 public class FeldController extends MouseAdapter{

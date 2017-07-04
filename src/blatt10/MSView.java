@@ -1,7 +1,4 @@
-//weiß nicht ganz ob das mit dem Einfügen so funktioniert wie das soll
-//und  ob man das Fesamte auch noch mal Updaten muss wenn eins der FieldViews sich ändert oder ob das dass
-//schon automatisch macht
-//update methode muss noch geschrieben werden damit man sieht wann das Spiel verloren ist
+
 package blatt10;
 
 import javax.swing.*;
@@ -10,6 +7,11 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
+ * Implementieren Sie die graﬁsche Oberﬂäche für Ihr Spiel unter der Verwendung von Swing-Komponenten. Verknüpfen Sie die
+ * jeweiligen Komponenten wenn nötig mit dem Model, in dem Sie das Interface java.util.Observer implementieren. Ist ein Spiel
+ * beendet, soll der Benutzer über einen Dialog darüber benachrichtig werden, ob er gewonnen oder verloren hat. Ein laufendes
+ * Spiel könnte beispielsweise wie in der Abbildung unten aussehen.
+ *
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 29.06.17
  */
@@ -18,6 +20,7 @@ public class MSView extends JPanel implements Observer {
     private JPanel feld;
     private JLabel nachricht;
     private MSModel model;
+    private final String bombenAnzeige = "Anzahl der übrigen Bomben: " ;
 
     public MSView(MSModel model) {
 
@@ -42,8 +45,8 @@ public class MSView extends JPanel implements Observer {
                 feld.add(new FeldView(this,felder[i][j]));
             }
 
-         this.nachricht.setText("Spiel im Gange" + " "
-                     + model.getNumberOfBombs());
+         this.nachricht.setText(bombenAnzeige
+                     + model.getAnzahlBomben());
          this.add(this.nachricht, BorderLayout.NORTH);
          this.add(this.feld, BorderLayout.CENTER);
 
@@ -55,7 +58,7 @@ public class MSView extends JPanel implements Observer {
     }
 
     /**
-     * change display when game is lost
+     * obige Anzeige ändern und Benachrichtigung, wenn Spiel vorbei
      *
      * @param o
      * @param arg
@@ -67,8 +70,8 @@ public class MSView extends JPanel implements Observer {
         else if (model.getZustand() == -1)
             JOptionPane.showMessageDialog(this.getParent(), "Sie haben verloren", "Spiel vorbei!", JOptionPane.INFORMATION_MESSAGE);
         else
-            nachricht.setText("Spiel im gange:" +" "
-                    + (model.getNumberOfBombs() - model.getNumberOfFlags()));
+            nachricht.setText(bombenAnzeige
+                    + (model.getAnzahlBomben() - model.getAnzahlFlaggen()));
 
     }
 }
