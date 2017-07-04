@@ -10,11 +10,13 @@ public class Feld extends Observable{
     private boolean aufgedeckt;
     private Feld[] nachbarn;
     private boolean flagged;
+    private MSModel model;
 
-    public Feld(){
+    public Feld(MSModel m){
         wert = 0;
         aufgedeckt = false;
         flagged = false;
+        model = m;
     }
 
 
@@ -23,9 +25,10 @@ public class Feld extends Observable{
     }
 
     public void setFlagged(boolean b){
-        flagged = true;
+        flagged = !flagged;
         setChanged();
         notifyObservers(this);
+        model.flagChanged( this );
     }
 
     /**
@@ -60,6 +63,7 @@ public class Feld extends Observable{
         }
         setChanged();
         notifyObservers(this);
+        model.fieldRevealed(this);
     }
 
     public boolean getBombe(){

@@ -15,17 +15,22 @@ import java.util.Observer;
  */
 public class MSView extends JPanel implements Observer {
 
-    //JPanel[][] panels;
-    //MSModel model;
+    private JPanel feld;
+    private JLabel nachricht;
+    private MSModel model;
 
     public MSView(MSModel model) {
 
-         //this.model = model;
+
         //Panel initializieren
         int hoehe = model.getHoehe();
         int breite = model.getBreite();
+        this.model = model;
 
-        this.setLayout(new GridLayout(hoehe, breite));
+        setLayout( new BorderLayout( ) );
+        feld = new JPanel(  );
+        nachricht = new JLabel();
+        feld.setLayout(new GridLayout(hoehe, breite));
 
         Feld[][] felder = model.getFelder();
 
@@ -36,8 +41,12 @@ public class MSView extends JPanel implements Observer {
             for (int j = 0; j < breite; j++) {
                 FeldView fv = new FeldView(this,felder[i][j]);
                 felder[i][j].addObserver( fv );
-                this.add(fv.getPanel());
+                feld.add(fv.getPanel());
             }
+         this.add(this.nachricht, BorderLayout.NORTH);
+         this.add(this.feld, BorderLayout.CENTER);
+
+         model.addObserver( this );
          }
 
 

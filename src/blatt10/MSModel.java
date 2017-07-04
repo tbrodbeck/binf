@@ -1,6 +1,9 @@
 package blatt10;
 
 
+
+
+import java.util.Observable;
 import java.util.Random;
 
 /**
@@ -14,16 +17,32 @@ import java.util.Random;
  * @author Ronja von Kittlitz, Tillmann Brodbeck
  * @version 29.06.17
  */
-public class MSModel {
+public class MSModel extends Observable {
 
     private int hoehe;
     private int breite;
     private Feld[][] felder;
+    private int zustand;
+
+    private int numberOfBombs;
+
+    /**
+     * The actual number of flags set on all {@code Field} elements of this
+     * {@code GameBoard}.
+     */
+    private int numberOfFlags;
+
+    /**
+     * The actual number of revealed {@code Field} elements of this
+     * {@code GameBoard}.
+     */
+    private int numberOfRevealed;
 
     public MSModel(int hoehe, int breite, int bomben) {
         if(hoehe < 0||breite < 0|| bomben <0 || bomben >= breite * hoehe) throw new IllegalArgumentException("Die Werte müssen positiv sein");
         this.hoehe = hoehe;
         this.breite = breite;
+        zustand = 0;
         felder = new Feld[hoehe][breite];
         initialize(bomben, felder);
     }
@@ -38,7 +57,7 @@ public class MSModel {
         // Felder erstellen
         for (int i = 0; i < hoehe; i++) {
             for (int j = 0; j < breite; j++) {
-                felder[i][j] = new Feld();
+                felder[i][j] = new Feld(this);
             }
         }
 
@@ -95,23 +114,6 @@ public class MSModel {
         else return null;
     }
 
-    /**public void aufdecken(int i, int j) {
-        if(i>=0 && j>=0 && i<hoehe && j<breite) {
-            aufgedeckt[i][j] = true;
-            if (field[i][j] == -1) verloren = true;
-            if (field[i][j] == 0) {
-                aufdecken(i - 1, j - 1);
-                aufdecken(i - 1, j);
-                aufdecken(i - 1, j + 1);
-                aufdecken(i, j - 1);
-                aufdecken(i, j + 1);
-                aufdecken(i + 1, j - 1);
-                aufdecken(i + 1, j);
-                aufdecken(i + 1, j + 1);
-            }
-        }
-    }*/
-
     public Feld[][] getFelder() {
         return felder;
     }
@@ -122,6 +124,34 @@ public class MSModel {
 
     public int getBreite() {
         return breite;
+    }
+
+
+    public void fieldRevealed(Feld f) {
+
+        this.numberOfRevealed++;
+        if (f.getBombe()) {
+            this.zustand = -1;
+        } else if (numberOfRevealed + numberOfBombs == felder.length
+                * felder[0].length) {
+            this.zustand = 1;
+        }
+
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+
+    public void flagChanged(Feld f) {
+
+        if (f.getFlagged()) {
+            this.numberOfFlags++;
+        } else {
+            this.numberOfFlags--;
+        }
+
+        this.setChanged();
+        this.notifyObservers();
     }
 
 }
